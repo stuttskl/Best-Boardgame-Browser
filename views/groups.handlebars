@@ -1,12 +1,14 @@
 <div class="container">
-	<h1>List of All Games</h1>
+	<h1>List of All Groups</h1>
 	<table class='table'>
 		<thead>
 			<th>Group Name</th>
+			<th>Group Members</th>
 		</thead>
 		{{#each data}}
 			<tbody>
 				<td>{{this.group_name}}</td>
+				<td>{{this.first_name}}, {{this.last_name}}</td>
 			</tbody>
 		{{/each}}               
 	</table>

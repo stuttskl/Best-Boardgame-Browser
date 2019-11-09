@@ -50,7 +50,6 @@ app.get('/player_addGame', function (req, res, next) {
 });
 
 app.get('/player_lookup', function (req, res, next) {
-    mysql.pool.query('SELECT first_name, last_name FROM players')
     res.render('player_lookup');
 });
 
@@ -67,12 +66,24 @@ app.get('/games', function (req, res, next) {
 // GROUP ROUTES
 
 app.get('/groups', function (req, res, next) {
-    mysql.pool.query('SELECT * FROM `groups`', (err, rows) => {
+    // mysql.pool.query('SELECT * FROM `groups`', (err, rows) => {
+    //     if(err) {
+    //         next(err); return;
+    //     }
+    //     // res.send({data:rows});
+    //     res.render('groups', {data: rows});
+    // });
+    let queryStr = "SELECT first_name, last_name" +
+    "FROM players" + 
+    "INNER JOIN player_groups ON player_groups.player_id = players.id" +
+    "WHERE player_groups.group_id IN" +
+    "(SELECT groups.id" +
+    "FROM `groups`" +
+    "WHERE group_name = 'Team Voldemort');";
+    mysql.pool.query(queryStr, (err, rows) => {
         if(err) {
             next(err); return;
-        }
-        // res.send({data:rows});
-        res.render('groups', {data: rows});
+        } res.render('groups', {data: rows});
     });
 });
 
@@ -89,20 +100,7 @@ app.get('/group_lookup', function (req, res, next) {
 });
 
 // View whole table with get
-app.get('/get-player-table', function(req, res, next) {
-    console.log("in get-table");
-    var sql = "SELECT * FROM players";
-    var context = {};
-    mysql.pool.query(sql, function(err, rows) {
-        if(err) {
-            next(err);
-            return;
-        }
-        context.results = JSON.stringify(rows);
-        res.type("application/json");
-        res.send(rows);
-    });
-});
+
 
 // app.post('/insert', function (req, res, next) {
 //     var sql = "INSERT INTO workouts (`name`, `reps`, `weight`, `date`, `lbs`) VALUES (?, ?, ?, ?, ?)";
@@ -121,24 +119,6 @@ app.get('/get-player-table', function(req, res, next) {
 //                 res.send(rows);
 //             })
 //         };
-//     });
-// });
-
-// resets table
-// app.get('/reset-table',function(req, res, next) {
-//     var context = {};
-//     mysql.pool.query("DROP TABLE IF EXISTS workouts", function(err) { 
-//         var createString = "CREATE TABLE workouts("+
-//         "id INT PRIMARY KEY AUTO_INCREMENT,"+
-//         "name VARCHAR(255) NOT NULL,"+
-//         "reps INT,"+
-//         "weight INT,"+
-//         "date DATE,"+
-//         "lbs BOOLEAN)";
-//         mysql.pool.query(createString, function (err) {
-//             context.results = "Table reset dawg";
-//             res.render('home', context);
-//         });
 //     });
 // });
 
