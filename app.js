@@ -30,14 +30,27 @@ app.get('/players', function (req, res, next) {
 });
 
 app.get('/player_add', function (req, res, next) {
-    res.render('player_add');
+    mysql.pool.query('SELECT * FROM players', (err, rows) => {
+        if(err) {
+            next(err); return;
+        }
+        // res.send({data:rows});
+        res.render('player_add', {data: rows});
+    });
 });
 
 app.get('/player_addGame', function (req, res, next) {
-    res.render('player_add');
+    mysql.pool.query('SELECT * FROM players', (err, rows) => {
+        if(err) {
+            next(err); return;
+        }
+        // res.send({data:rows});
+        res.render('player_addGame', {data: rows});
+    });
 });
 
 app.get('/player_lookup', function (req, res, next) {
+    mysql.pool.query('SELECT first_name, last_name FROM players')
     res.render('player_lookup');
 });
 
@@ -90,23 +103,6 @@ app.get('/get-player-table', function(req, res, next) {
         res.send(rows);
     });
 });
-
-
-// View whole table with get
-// app.get('/get-table', function(req, res, next) {
-//     console.log("in get-table");
-//     var sql = "SELECT *, DATE_FORMAT(date, '%d-%m-%Y') as date FROM workouts";
-//     var context = {};
-//     mysql.pool.query(sql, function(err, rows) {
-//         if(err) {
-//             next(err);
-//             return;
-//         }
-//         context.results = JSON.stringify(rows);
-//         res.type("application/json");
-//         res.send(rows);
-//     });
-// });
 
 // app.post('/insert', function (req, res, next) {
 //     var sql = "INSERT INTO workouts (`name`, `reps`, `weight`, `date`, `lbs`) VALUES (?, ?, ?, ?, ?)";
