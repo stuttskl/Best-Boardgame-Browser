@@ -1,0 +1,21 @@
+<div class="container">
+	<h1>List of All Games</h1>
+	<table class='table'>
+		<thead>
+			<th>Game Name</th>
+			<th>Game Category</th>
+			<th>Minimum Players</th>
+			<th>Maximum Players</th>
+		</thead>
+		{{#each data}}
+			<tbody>
+				<td>{{this.group_name}}</td>
+			</tbody>
+		{{/each}}               
+	</table>
+
+	<button type="button" class="ylw-btn"> <a href="/group_create" >Create group</a></button>
+	<button type="button" class="ylw-btn"><a href="/group_addPlayer" >Add player to group</a></button>
+	<button type="button" class="ylw-btn"><a href="/group_lookup" >Look up group</a></button>
+
+</div>

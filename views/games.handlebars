@@ -1,0 +1,16 @@
+<div class='container'>
+  <h1>List of All Games</h1>
+	<table class='table'>
+		<thead>
+			<th>Game Name</th>
+			<th>Game Category</th>
+			<th>Minimum Players</th>
+			<th>Maximum Players</th>
+		</thead>
+		{{#each data}}
+			<tbody>
+				<td>{{this.game_name}}</td>
+			</tbody>
+		{{/each}}               
+	</table>
+</div>	

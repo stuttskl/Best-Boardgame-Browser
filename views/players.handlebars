@@ -1,0 +1,19 @@
+<div class='container'>
+	<h1>All Players</h1>
+	<table class='table'>
+		<thead>
+			<th>First Name</th>
+			<th>Last Name</th>
+		</thead>
+		{{#each data}}
+			<tbody>
+				<td>{{this.first_name}}</td>
+				<td>{{this.last_name}}</td>
+			</tbody>
+		{{/each}}               
+	</table>
+
+	<button type="button" class="ylw-btn"><a href="/player_add">Add New Player</a></button>
+	<button type="button" class="ylw-btn"><a href="/player_lookup">Look Up A Player</a></button>
+	<button type="button" class="ylw-btn"><a href="/player_addGame">Add Game to Player Library</a></button>
+</div>
