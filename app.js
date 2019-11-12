@@ -11,7 +11,7 @@ app.use(morgan('dev'));
 app.use(express.static('public'));
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
-app.set('port', 8000);
+app.set('port', 3993);
 
 app.get('/', function (req, res, next) {
     res.render('home');
