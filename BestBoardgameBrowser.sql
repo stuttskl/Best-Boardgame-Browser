@@ -72,18 +72,18 @@ CREATE TABLE `games` (
 --
 
 INSERT INTO `games` (`id`, `game_name`, `max_players`, `min_players`) VALUES
-(1, 'Spyfall', 8, 4),
-(2, 'Hanabi', 4, 1),
-(3, 'SET', 4, 1),
-(4, 'Gloomhaven', 4, 1),
-(5, 'Pandemic', 4, 2),
-(6, 'Azul', 4, 2),
-(7, 'Star Realms', 2, 2),
-(8, 'Anomia', 8, 2),
-(9, 'Risk', 6, 2),
-(10, 'Dominion', 4, 2),
-(11, 'Acquire', 6, 2),
-(12, 'Monopoly', 6, 2);
+(1, ':Spyfall:', 8, 4),
+(2, ':Hanabi:', 4, 1),
+(3, ':SET:', 4, 1),
+(4, ':Gloomhaven:', 4, 1),
+(5, ':Pandemic:', 4, 2),
+(6, ':Azul:', 4, 2),
+(7, ':Star Realms:', 2, 2),
+(8, ':Anomia:', 8, 2),
+(9, ':Risk:', 6, 2),
+(10, ':Dominion:', 4, 2),
+(11, ':Acquire:', 6, 2),
+(12, ':Monopoly:', 6, 2);
 
 -- --------------------------------------------------------
 
@@ -131,10 +131,10 @@ CREATE TABLE `groups` (
 --
 
 INSERT INTO `groups` (`id`, `group_name`) VALUES
-(1, 'Team Gryffindor'),
-(2, 'Team Voldemort'),
-(3, 'Blue Team'),
-(4, 'Team U.S.A');
+(1, ':Team Gryffindor:'),
+(2, ':Team Voldemort:'),
+(3, ':Blue Team:'),
+(4, ':Team U.S.A:');
 
 -- --------------------------------------------------------
 
@@ -153,18 +153,18 @@ CREATE TABLE `players` (
 --
 
 INSERT INTO `players` (`id`, `first_name`, `last_name`) VALUES
-(1, 'Katie', 'Stutts'),
-(2, 'Zack', 'Jaffe-Notier'),
-(3, 'Michael', 'Scott'),
-(4, 'Jim', 'Halpert'),
-(5, 'Kevin', 'Malone'),
-(6, 'Leslie', 'Knope'),
-(7, 'April', 'Ludgate'),
-(8, 'Bert', 'Macklin'),
-(9, 'Tom', 'Haverford'),
-(10, 'Ben', 'Wyatt'),
-(11, 'Chris', 'Trager'),
-(12, 'Ann', 'Perkins');
+(1, ':Katie:', ':Stutts:'),
+(2, ':Zack:', ':Jaffe-Notier:'),
+(3, ':Michael:', ':Scott:'),
+(4, ':Jim:', ':Halpert:'),
+(5, ':Kevin:', ':Malone:'),
+(6, ':Leslie:', ':Knope:'),
+(7, ':April:', ':Ludgate:'),
+(8, ':Bert:', ':Macklin:'),
+(9, ':Tom:', ':Haverford:'),
+(10, ':Ben:', ':Wyatt:'),
+(11, ':Chris:', ':Trager:'),
+(12, ':Ann:', ':Perkins:');
 
 -- --------------------------------------------------------
 
