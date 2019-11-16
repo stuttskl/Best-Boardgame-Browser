@@ -11,7 +11,7 @@ app.use(morgan('dev'));
 app.use(express.static('public'));
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
-app.set('port', 3993);
+app.set('port', 39993);
 
 app.get('/', function (req, res, next) {
     res.render('home');
@@ -172,6 +172,6 @@ app.use(function (err, req, res, next) {
 });
 
 app.listen(app.get('port'), function() {
-    console.log('flip1.engr.oregonstate.edu:' + app.get('port') + '; press Ctrl-C to terminate.');
+    console.log('server listening on: flip2.engr.oregonstate.edu:' + app.get('port') + '; press Ctrl-C to terminate.');
 });
 
