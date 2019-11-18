@@ -30,12 +30,37 @@ app.get('/players', function (req, res, next) {
 });
 
 app.get('/player_add', function (req, res, next) {
-    mysql.pool.query('SELECT * FROM players', (err, rows) => {
+    mysql.pool.query('SELECT group_name FROM `groups`', (err, rows) => {
         if(err) {
             next(err); return;
         }
         // res.send({data:rows});
         res.render('player_add', {data: rows});
+    });
+});
+
+app.post('/player_add', function (req, res, next) {
+  var sql = "INSERT INTO players (`first_name`, `last_name`) VALUES (?, ?)";
+	mysql.pool.query(sql, [req.body.first_name, req.body.last_name], function(err, result) {
+        if(err) {
+            next(err);
+            return;
+        } else {	
+            mysql.pool.query("SELECT * FROM players", function(err, rows) {
+                if(err) {
+                    next(err);
+                    return;
+                }
+            //     // console.log(JSON.stringify(rows));    	
+            //     res.type("application/json");
+                // res.render('players', {data:rows});
+                // res.send(rows);
+              // console.log(JSON.stringify(rows));    	
+              // res.type("application/json");
+              // res.send(rows);
+              res.redirect('/players')
+            });
+        };
     });
 });
 
@@ -66,25 +91,25 @@ app.get('/games', function (req, res, next) {
 // GROUP ROUTES
 
 app.get('/groups', function (req, res, next) {
-    // mysql.pool.query('SELECT * FROM `groups`', (err, rows) => {
-    //     if(err) {
-    //         next(err); return;
-    //     }
-    //     // res.send({data:rows});
-    //     res.render('groups', {data: rows});
-    // });
-    let queryStr = "SELECT first_name, last_name" +
-    "FROM players" + 
-    "INNER JOIN player_groups ON player_groups.player_id = players.id" +
-    "WHERE player_groups.group_id IN" +
-    "(SELECT groups.id" +
-    "FROM `groups`" +
-    "WHERE group_name = 'Team Voldemort');";
-    mysql.pool.query(queryStr, (err, rows) => {
-        if(err) {
-            next(err); return;
-        } res.render('groups', {data: rows});
+     mysql.pool.query('SELECT * FROM `groups`', (err, rows) => {
+         if(err) {
+             next(err); return;
+         }
+         // res.send({data:rows});
+         res.render('groups', {data: rows});
     });
+    //let queryStr = "SELECT first_name, last_name" +
+    //"FROM players" + 
+    //"INNER JOIN player_groups ON player_groups.player_id = players.id" +
+    //"WHERE player_groups.group_id IN" +
+    //"(SELECT groups.id" +
+    //"FROM `groups`" +
+    //"WHERE group_name = 'Team Voldemort');";
+    //mysql.pool.query(queryStr, (err, rows) => {
+    //    if(err) {
+    //        next(err); return;
+    //    } res.render('groups', {data: rows});
+    //});
 });
 
 app.get('/group_addPlayer', function (req, res, next) {
