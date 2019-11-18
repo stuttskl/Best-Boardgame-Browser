@@ -29,15 +29,15 @@ app.get('/players', function (req, res, next) {
     });
 });
 
-app.get('/player_add', function (req, res, next) {
-    mysql.pool.query('SELECT group_name FROM `groups`', (err, rows) => {
-        if(err) {
-            next(err); return;
-        }
-        // res.send({data:rows});
-        res.render('player_add', {data: rows});
-    });
-});
+// app.get('/player_add', function (req, res, next) {
+//     mysql.pool.query('SELECT group_name FROM `groups`', (err, rows) => {
+//         if(err) {
+//             next(err); return;
+//         }
+//         // res.send({data:rows});
+//         res.render('player_add', {data: rows});
+//     });
+// });
 
 app.post('/player_add', function (req, res, next) {
   var sql = "INSERT INTO players (`first_name`, `last_name`) VALUES (?, ?)";
@@ -57,19 +57,36 @@ app.post('/player_add', function (req, res, next) {
     });
 });
 
-app.get('/player_delete', function(req, res, next) {
-    // var context = {};
-    mysql.pool.query("DELETE FROM players WHERE id = ?", [req.query.id], function (err, result) {
-        if (err) {
-            next(err);
-            return;
+app.delete('/player_delete/:id', function(req, res){
+  console.log('INSIDE PLAYER_DELETE')
+    // var mysql = req.app.get('mysql');
+    var inserts = [req.params.id];
+    mysql.pool.query("DELETE FROM players WHERE id = ?", inserts, function(error, results, fields){
+        if(error){
+            res.write(JSON.stringify(error));
+            res.status(400);
+            res.end();
+        }else{
+            res.render('players');
+            res.status(202).end();
         }
-        // context.results = 'Deleted rows.';
-        // res.type('text/plain');
-        res.send(res);
-        res.render('players');
-    });
-});
+    })
+})
+
+// app.get('/player_delete', function(req, res, next) {
+//     // var context = {};
+//     mysql.pool.query("DELETE FROM players WHERE id = ?", [req.body.id], function (err, result) {
+//         if (err) {
+//             next(err);
+//             return;
+//         }
+//         // context.results = 'Deleted rows.';
+//         res.type('application/json');
+//         // res.send(res);
+//         res.render('players');
+//     });
+// });
+
 
 app.get('/players_update', function (req, res, next) {
   res.render('players_update');
