@@ -51,16 +51,49 @@ app.post('/player_add', function (req, res, next) {
                     next(err);
                     return;
                 }
-            //     // console.log(JSON.stringify(rows));    	
-            //     res.type("application/json");
-                // res.render('players', {data:rows});
-                // res.send(rows);
-              // console.log(JSON.stringify(rows));    	
-              // res.type("application/json");
-              // res.send(rows);
               res.redirect('/players')
             });
         };
+    });
+});
+
+app.get('/player_delete', function(req, res, next) {
+    // var context = {};
+    mysql.pool.query("DELETE FROM players WHERE id = ?", [req.query.id], function (err, result) {
+        if (err) {
+            next(err);
+            return;
+        }
+        // context.results = 'Deleted rows.';
+        // res.type('text/plain');
+        res.send(res);
+        res.render('players');
+    });
+});
+
+app.get('/players_update', function (req, res, next) {
+  res.render('players_update');
+})
+
+app.get('/players_update/(:id)', function (req, res, next) {
+    var context= {};
+    mysql.pool.query("SELECT * FROM players WHERE id?", [req.query.id], function (err, result) {
+        if (err) {
+            next(err);
+            return;
+        }
+        if (result.length == 1) {
+            var curVals = result[0];
+            mysql.pool.query("UPDATE players SET first_name=?, last_name=?",
+            [req.query.first_name , req.query.last_name], function(err, result) {
+                if (err) {
+                    next(err);
+                    return;
+                }
+                context.results = "Updated rows.";
+                res.render('players', context);
+            });
+        }
     });
 });
 
@@ -87,6 +120,36 @@ app.get('/games', function (req, res, next) {
         res.render('games', {data: rows});
     });
 });
+
+app.get('/games_add', function(req, res, next) {
+  mysql.pool.query('SELECT * FROM games', (err, rows) => {
+    if(err) {
+        next(err); return;
+    }
+    // res.send({data:rows});
+    res.render('games', {data: rows});
+    });
+})
+
+app.post('/games_add', function (req, res, next) {
+  var sql = "INSERT INTO games (`game_name`, `min_players`, `max_players`) VALUES (?, ?, ?)";
+	mysql.pool.query(sql, [req.body.game_name, req.body.min_players, req.body.max_players], function(err, result) {
+        if(err) {
+            next(err);
+            return;
+        } else {	
+            mysql.pool.query("SELECT * FROM games", function(err, rows) {
+                if(err) {
+                    next(err);
+                    return;
+                }
+              res.redirect('/games')
+            });
+        };
+    });
+});
+
+
 
 // GROUP ROUTES
 

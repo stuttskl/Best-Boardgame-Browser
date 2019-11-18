@@ -4,11 +4,15 @@
 		<thead>
 			<th>First Name</th>
 			<th>Last Name</th>
+      <th>Delete Player</th>
+      <th>Edit Player</th>
 		</thead>
 		{{#each data}}
 			<tbody>
 				<td>{{this.first_name}}</td>
 				<td>{{this.last_name}}</td>
+        <td><button type="button" class="btn btn-default" value="{{this.id}}"><a href="/player_delete"><span class="glyphicon glyphicon-remove"></span></a></button></td>
+        <td><button type="button" class="btn btn-default" value="{{this.id}}"><a href="/players_update"><span class="glyphicon glyphicon-pencil"></span></a></button></td>
 			</tbody>
 		{{/each}}               
 	</table>

@@ -1,0 +1,17 @@
+<form id="newExercise" action="/players_update">
+
+  <fieldset>
+
+	<legend> Please enter player information </legend>
+
+	<label for="eName">First Name:</label>
+  <input type="text" name="first_name" id="fName" value="{{players.first_name}}"> <br>
+
+  <label for="eName">Last Name:</label>
+  <input type="text" name="last_name" id="lName" value="{{players.last_name}}"> <br>
+
+	<input type="hidden" name="id" value={{this.players.id}}>
+	<input type="submit" id="submit" value="Click to submit info">
+	
+  </fieldset>
+</form>
