@@ -146,18 +146,6 @@ app.post('/games_add', function (req, res, next) {
     });
 });
 
-app.get('/games_add', function(req, res, next) {
-  mysql.pool.query('SELECT * FROM games', (err, rows) => {
-    if(err) {
-        next(err); return;
-    }
-    // res.send({data:rows});
-    res.render('games', {data: rows});
-    });
-})
-
-
-
 app.post('/games_add', function (req, res, next) {
   var sql = "INSERT INTO games (`game_name`, `min_players`, `max_players`) VALUES (?, ?, ?)";
 	mysql.pool.query(sql, [req.body.game_name, req.body.min_players, req.body.max_players], function(err, result) {
@@ -200,6 +188,24 @@ app.get('/groups', function (req, res, next) {
     //        next(err); return;
     //    } res.render('groups', {data: rows});
     //});
+});
+
+app.post('/groups_add', function (req, res, next) {
+  var sql = "INSERT INTO groups (`group_name`) VALUES (?)";
+	mysql.pool.query(sql, [req.body.group_name], function(err, result) {
+        if(err) {
+            next(err);
+            return;
+        } else {	
+            mysql.pool.query("SELECT * FROM groups", function(err, rows) {
+                if(err) {
+                    next(err);
+                    return;
+                }
+              res.redirect('/groups')
+            });
+        };
+    });
 });
 
 app.get('/group_addPlayer', function (req, res, next) {
