@@ -1,7 +1,10 @@
+console.log('client.js connectioned')
+
 function deletePlayer(id){
+    console.log("inside deletePlayer function")
     $.ajax({
-        url: '/player_delete/' + id,
-        type: 'GET',
+        url: '/players_delete/' + id,
+        type: 'DELETE',
         success: function(result){
             window.location.reload(true);
         }

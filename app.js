@@ -29,16 +29,6 @@ app.get('/players', function (req, res, next) {
     });
 });
 
-// app.get('/player_add', function (req, res, next) {
-//     mysql.pool.query('SELECT group_name FROM `groups`', (err, rows) => {
-//         if(err) {
-//             next(err); return;
-//         }
-//         // res.send({data:rows});
-//         res.render('player_add', {data: rows});
-//     });
-// });
-
 app.post('/player_add', function (req, res, next) {
   var sql = "INSERT INTO players (`first_name`, `last_name`) VALUES (?, ?)";
 	mysql.pool.query(sql, [req.body.first_name, req.body.last_name], function(err, result) {
@@ -57,21 +47,21 @@ app.post('/player_add', function (req, res, next) {
     });
 });
 
-app.delete('/player_delete/:id', function(req, res){
+app.get('/players_delete/:id', function(req, res){
   console.log('INSIDE PLAYER_DELETE')
     // var mysql = req.app.get('mysql');
-    var inserts = [req.params.id];
-    mysql.pool.query("DELETE FROM players WHERE id = ?", inserts, function(error, results, fields){
-        if(error){
-            res.write(JSON.stringify(error));
+    // var inserts = [req.params.id];
+    mysql.pool.query("DELETE FROM players WHERE id = ?", [req.params.id], function(err, results){
+        if(err){
+            res.write(JSON.stringify(err));
             res.status(400);
             res.end();
-        }else{
-            res.render('players');
+        } else {
+            // res.render('players_delete/:id' + inserts);
             res.status(202).end();
         }
-    })
-})
+    });
+});
 
 // app.get('/player_delete', function(req, res, next) {
 //     // var context = {};
@@ -138,6 +128,24 @@ app.get('/games', function (req, res, next) {
     });
 });
 
+app.post('/games_add', function (req, res, next) {
+  var sql = "INSERT INTO games (`game_name`, `max_players`, `min_players`) VALUES (?, ?, ?)";
+	mysql.pool.query(sql, [req.body.game_name, req.body.max_players, req.body.min_players], function(err, result) {
+        if(err) {
+            next(err);
+            return;
+        } else {	
+            mysql.pool.query("SELECT * FROM games", function(err, rows) {
+                if(err) {
+                    next(err);
+                    return;
+                }
+              res.redirect('/games')
+            });
+        };
+    });
+});
+
 app.get('/games_add', function(req, res, next) {
   mysql.pool.query('SELECT * FROM games', (err, rows) => {
     if(err) {
@@ -147,6 +155,8 @@ app.get('/games_add', function(req, res, next) {
     res.render('games', {data: rows});
     });
 })
+
+
 
 app.post('/games_add', function (req, res, next) {
   var sql = "INSERT INTO games (`game_name`, `min_players`, `max_players`) VALUES (?, ?, ?)";
