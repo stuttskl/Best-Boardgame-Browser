@@ -3,7 +3,7 @@ module.exports = function () {
 	var router = express.Router();
 
   function getGames(res, mysql, context, complete) {
-    mysql.pool.query("SELECT id, game_name, max_players, min_players FROM players", function (error, results, fields) {
+    mysql.pool.query("SELECT id, game_name, max_players, min_players FROM games", function (error, results, fields) {
       if (error) {
         res.write(JSON.stringify(error));
         res.end();

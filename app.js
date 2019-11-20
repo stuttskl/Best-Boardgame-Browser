@@ -16,7 +16,7 @@ app.set('view engine', 'handlebars');
 app.set('port', 39993);
 
 app.get('/', function(req, res, next) {
-  res.render('home', context);
+  res.render('home');
 });
 
 app.use('/players', require('./public/js/players.js'));

@@ -3,7 +3,7 @@ module.exports = function () {
 	var router = express.Router();
 
   function getPlayers(res, mysql, context, complete) {
-    mysql.pool.query("SELECT id, first_name, last_name FROM players", function (error, results, fields) {
+    mysql.pool.query("SELECT id, first_name, last_name FROM players", function (error, results) {
       if (error) {
         res.write(JSON.stringify(error));
         res.end();
@@ -17,12 +17,12 @@ module.exports = function () {
 		//sanitize the input as well as include the % character
 		var query = "SELECT id, first_name, last_name FROM players WHERE " + req.query.filter + " LIKE " + mysql.pool.escape('%' + req.query.search + '%');
 		console.log(query)
-		mysql.pool.query(query, function (error, results, fields) {
-			if (error) {
-				res.write(JSON.stringify(error));
+		mysql.pool.query(query, function (err, results) {
+			if (err) {
+				res.write(JSON.stringify(err));
 				res.end();
 			}
-			context.account = results;
+			context.player = results;
 			complete();
 		});
 	};
@@ -59,10 +59,10 @@ module.exports = function () {
 		var mysql = req.app.get('mysql');
 		var sql = "INSERT INTO players (`first_name`, `last_name`) VALUES (?, ?)";
 		var inserts = [req.body.new_first_name, req.body.new_last_name];
-		sql = mysql.pool.query(sql, inserts, function (error) {
-			if (error) {
-				console.log(JSON.stringify(error))
-				res.write(JSON.stringify(error));
+		sql = mysql.pool.query(sql, inserts, function (err) {
+			if (err) {
+				console.log(JSON.stringify(err))
+				res.write(JSON.stringify(err));
 				res.end();
 			} else {
 				res.redirect('/players');
@@ -75,10 +75,10 @@ module.exports = function () {
 		var mysql = req.app.get('mysql');
 		var sql = "UPDATE players SET first_name = ?, last_name= ? WHERE id = ?";
 		var inserts = [req.body.editFirstName, req.body.editLastName, req.body.updateID];
-		sql = mysql.pool.query(sql, inserts, function (error,) {
-			if (error) {
-				console.log(JSON.stringify(error))
-				res.write(JSON.stringify(error));
+		sql = mysql.pool.query(sql, inserts, function (err) {
+			if (err) {
+				console.log(JSON.stringify(err))
+				res.write(JSON.stringify(err));
 				res.end();
 			} else {
 				res.redirect('/players');
@@ -90,10 +90,10 @@ module.exports = function () {
 		var mysql = req.app.get('mysql');
 		var sql = "DELETE FROM players WHERE id = ?";
 		var inserts = [req.body.deleteID];
-		sql = mysql.pool.query(sql, inserts, function (error) {
-			if (error) {
-				console.log(error)
-				res.write(JSON.stringify(error));
+		sql = mysql.pool.query(sql, inserts, function (err) {
+			if (err) {
+				console.log(err)
+				res.write(JSON.stringify(err));
 				res.status(400);
 				res.end();
 			} else {

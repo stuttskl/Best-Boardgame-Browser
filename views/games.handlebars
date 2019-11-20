@@ -1,8 +1,6 @@
 <div class="container" id='containerbg'>
 	<h1>Games Database</h1>
-
-	<!-- Search bar -->
-	<form class="" action="/games/search" method="get">
+	<form action="/games/search" method="get">
 		<div class="form-row">
 			<div class="form-group col-md-7">
 				<input name="search" class="form-control" type="text" placeholder="Search" aria-label="Search">
@@ -14,12 +12,10 @@
 				</select>
 			</div>
 			<div class="form-group col-md-2">
-				<button type="submit" class="btn btn-primary btn-block">Search</button>
+				<button type="submit" class="ylw-btn">Search</button>
 			</div>
 		</div>
 	</form>
-
-	<!-- Add Account -->
 
 	<button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#addaccount" aria-expanded="false" aria-controls="addaccount">
 		Add Game
@@ -40,13 +36,9 @@
 					<input type="number" class="form-control" name="new_max_players" placeholder="Max Players">
 				</div>
 			</div>
-			<button type="submit" class="btn btn-primary">Submit</button>
+			<button type="submit" class="ylw-btn">Submit</button>
 		</form>
 	</div>
-
-	<hr>
-
-	<!-- Display Player Data -->
 
 	<div class="table-responsive">
 		<table class='table'>
@@ -65,7 +57,7 @@
           <td>{{game_category}}</td>
           <td>{{min_players}}</td>
           <td>{{max_players}}</td>
-					<td><button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalUpdate{{id}}">Update</button></td>
+					<td><button type="button" class="ylw-btn" data-toggle="modal" data-target="#modalUpdate{{id}}">Update</button></td>
 					<td>
 						<form action="players/delete" method="post">
 							<input type="hidden" name="deleteID" value="{{id}}">
@@ -78,7 +70,6 @@
 		</table>
 	</div>
 
-	<!-- Edit Pop Up (called Modal) -->
 {{#each player}}
 	<div class="row d-flex justify-content-center modalWrapper">
 		<div class="modal fade modalUpdateClass" id="modalUpdate{{id}}" tabindex="-1" role="dialog" aria-hidden="true">
@@ -111,7 +102,7 @@
 							</div>
 						</div>
 						<div class="modal-footer d-flex justify-content-center updateInsideWrapper">
-							<button type="submit" class="btn btn-secondary btn-block updateInside">
+							<button type="submit" class="ylw-btn">
 								Confirm Changes
 								<i class="fas fa-paper-plane-o ml-1"></i>
 							</button>
@@ -123,40 +114,3 @@
 	</div>
 	{{/each}}
 </div> 
-
-{{!-- <div class='container'>
-  <h1>List of All Games</h1>
-	<table class='table'>
-		<thead>
-			<th>Game Name</th>
-			<th>Game Category</th>
-			<th>Minimum Players</th>
-			<th>Maximum Players</th>
-		</thead>
-		{{#each data}}
-			<tbody>
-				<td>{{this.game_name}}</td>
-        <td>{{this.game_category}}</td>
-        <td>{{this.min_players}}</td>
-        <td>{{this.max_players}}</td>
-			</tbody>
-		{{/each}}               
-	</table> --}}
-
-  {{!-- <div class="container">
-  <h1>Add A New Game to Player Library</h1>
-    <form action="games_add" method="post">
-      <div class="form-group">
-        <input type="text" class="form-control" id="" name="game_name" aria-describedby="" placeholder="Game Name">
-      </div>
-      <div class="form-group">
-        <input type="number" class="form-control" id="" name="min_players" placeholder="Minumum Number of Players">
-      </div>
-      <div class="form-group">
-        <input type="number" class="form-control" id="" name="max_players" placeholder="Maximum Number of Players">
-      </div>
-        <input type="submit" value="Submit" class="ylw-btn"></input>
-      </div>
-    </form>
-</div>
-</div>	 --}}
