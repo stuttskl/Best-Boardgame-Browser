@@ -3,12 +3,12 @@ module.exports = function () {
 	var router = express.Router();
 
   function getGames(res, mysql, context, complete) {
-    mysql.pool.query("SELECT id, game_name, max_players, min_players FROM games", function (error, results, fields) {
-      if (error) {
-        res.write(JSON.stringify(error));
+    mysql.pool.query("SELECT id, game_name, max_players, min_players FROM games", function (err, results) {
+      if (err) {
+        res.write(JSON.stringify(err));
         res.end();
       }
-      context.player = results;
+      context.games = results;
       complete();
     });
   };
@@ -17,12 +17,12 @@ module.exports = function () {
 		//sanitize the input as well as include the % character
 		var query = "SELECT id, game_name, max_players, min_players FROM games WHERE " + req.query.filter + " LIKE " + mysql.pool.escape('%' + req.query.search + '%');
 		console.log(query)
-		mysql.pool.query(query, function (error, results, fields) {
-			if (error) {
-				res.write(JSON.stringify(error));
+		mysql.pool.query(query, function (err, results) {
+			if (err) {
+				res.write(JSON.stringify(err));
 				res.end();
 			}
-			context.account = results;
+			context.games = results;
 			complete();
 		});
 	};
@@ -59,8 +59,8 @@ module.exports = function () {
 		var mysql = req.app.get('mysql');
 		var sql = "INSERT INTO games (`game_name`, `max_players`, `min_players`) VALUES (?, ?, ?)";
 		var inserts = [req.body.new_game_name, req.body.new_max_players, req.body.new_min_players];
-		sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
-			if (error) {
+		sql = mysql.pool.query(sql, inserts, function (err, results) {
+			if (err) {
 				console.log(JSON.stringify(error))
 				res.write(JSON.stringify(error));
 				res.end();
@@ -75,10 +75,10 @@ module.exports = function () {
 		var mysql = req.app.get('mysql');
 		var sql = "UPDATE players SET game_name = ?, max_players = ?, min_players =? WHERE id = ?";
 		var inserts = [req.body.editGameName, req.body.editMinPlayers, req.body.editMaxPlayers, req.body.updateID];
-		sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
-			if (error) {
-				console.log(JSON.stringify(error))
-				res.write(JSON.stringify(error));
+		sql = mysql.pool.query(sql, inserts, function (err, results) {
+			if (err) {
+				console.log(JSON.stringify(err))
+				res.write(JSON.stringify(err));
 				res.end();
 			} else {
 				res.redirect('/games');
@@ -90,10 +90,10 @@ module.exports = function () {
 		var mysql = req.app.get('mysql');
 		var sql = "DELETE FROM games WHERE id = ?";
 		var inserts = [req.body.deleteID];
-		sql = mysql.pool.query(sql, inserts, function (error, results, fields) {
-			if (error) {
-				console.log(error)
-				res.write(JSON.stringify(error));
+		sql = mysql.pool.query(sql, inserts, function (err, results) {
+			if (err) {
+				console.log(err)
+				res.write(JSON.stringify(err));
 				res.status(400);
 				res.end();
 			} else {
