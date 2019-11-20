@@ -31,7 +31,7 @@ module.exports = function () {
 		var callbackCount = 0;
 		var context = {};
 		var mysql = req.app.get('mysql');
-		getGames(res, mysql, context, complete);
+		getGroups(res, mysql, context, complete);
 		function complete() {
 			callbackCount++;
 			if (callbackCount >= 1) {
