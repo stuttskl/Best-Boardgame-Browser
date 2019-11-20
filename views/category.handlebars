@@ -1,0 +1,26 @@
+<div class='container'>
+	<h1>All Categories</h1>
+	<table class='table'>
+		<thead>
+			<th>Category Name</th>
+      <th>Delete Player</th>
+      <th>Edit Player</th>
+		</thead>
+		{{#each data}}
+			<tbody>
+				<td>{{category}}</td>
+        <td><button type="button" onclick="deletePlayer({{id}})" class="btn btn-default" id="" value="{{id}}"><span class="glyphicon glyphicon-remove"></span></a></button></td>
+        <td><button type="button" class="btn btn-default" value="{{id}}"><span class="glyphicon glyphicon-pencil"></span></a></button></td>
+			</tbody>
+		{{/each}}               
+	</table>
+
+  <h1>Add A New Category</h1>
+    <form action="category_add" method="post">
+      <div class="form-group">
+        <input type="text" class="form-control" id="" name="category_name" aria-describedby="" placeholder="Category Name">
+      </div>
+        <input type="submit" value="Submit" class="ylw-btn"></input>
+      </div>
+    </form>
+</div>

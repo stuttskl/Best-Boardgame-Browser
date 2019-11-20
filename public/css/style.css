@@ -43,3 +43,10 @@ table {
 form {
     padding: 10px;
 }
+
+footer {
+    position: fixed;
+    height: 50px;
+    bottom: 0;
+    width: 100%;
+}

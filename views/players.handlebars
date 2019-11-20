@@ -1,31 +1,103 @@
-<div class='container'>
-	<h1>All Players</h1>
-	<table class='table'>
-		<thead>
-			<th>First Name</th>
-			<th>Last Name</th>
-      <th>Delete Player</th>
-      <th>Edit Player</th>
-		</thead>
-		{{#each data}}
-			<tbody>
-				<td>{{first_name}}</td>
-				<td>{{last_name}}</td>
-        <td><button type="button" onclick="deletePlayer({{id}})" class="btn btn-default" id="player-delete-btn" value="{{id}}"><span class="glyphicon glyphicon-remove"></span></a></button></td>
-        <td><button type="button" class="btn btn-default" value="{{id}}"><span class="glyphicon glyphicon-pencil"></span></a></button></td>
-			</tbody>
-		{{/each}}               
-	</table>
+<div class="container" id='containerbg'>
+	<h1>Player Database</h1>
 
-  <h1>Add A New Player</h1>
-    <form action="player_add" method="post">
-      <div class="form-group">
-        <input type="text" class="form-control" id="" name="first_name" aria-describedby="" placeholder="First Name">
-      </div>
-      <div class="form-group">
-        <input type="text" class="form-control" id="" name="last_name" placeholder="Last Name">
-      </div>
-        <input type="submit" value="Submit" class="ylw-btn"></input>
-      </div>
-    </form>
-</div>
+	<form class="" action="/players/search" method="get">
+		<div class="form-row">
+			<div class="form-group col-md-7">
+				<input name="search" class="form-control" type="text" placeholder="Search" aria-label="Search">
+			</div>
+			<div class="form-group col-md-3">
+				<select class="form-control" name="filter">
+					<option value="first_name">First Name</option>
+					<option value="last_name">Last Name</option>
+				</select>
+			</div>
+			<div class="form-group col-md-2">
+				<button type="submit" class="btn btn-primary btn-block">Search</button>
+			</div>
+		</div>
+	</form>
+
+	<button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#addaccount" aria-expanded="false" aria-controls="addaccount">
+		Add Player
+	</button><br />
+	<div class="collapse" id="addaccount">
+		<form action="/players/add" method="post">
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<input type="text" class="form-control" name="new_first_name" placeholder="First Name">
+				</div>
+				<div class="form-group col-md-6">
+					<input type="text" class="form-control" name="new_last_name" placeholder="Last Name">
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+	</div>
+
+	<div class="table-responsive">
+		<table class='table'>
+			<thead>
+				<tr>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Update</th>
+					<th>Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each player}}
+				<tr>
+					<td>{{id}}</td>
+					<td>{{first_name}}</td>
+					<td>{{last_name}}</td>
+					<td><button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalUpdate{{id}}">Update</button></td>
+					<td>
+						<form action="players/delete" method="post">
+							<input type="hidden" name="deleteID" value="{{id}}">
+							<button type="submit" class="btn btn-danger">Delete</button>
+						</form>
+					</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+
+  {{#each player}}
+	<div class="row d-flex justify-content-center modalWrapper">
+		<div class="modal fade modalUpdateClass" id="modalUpdate{{id}}" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<form action="/players/update" method="post">
+						<input type="hidden" name="updateID" value="{{id}}">
+						<div class="modal-header text-center">
+							<h4 class="modal-title w-100 font-weight-bold ml-5">Update Entry</h4>
+							<button type="button" class="close text-secondary" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body mx-3">
+							<div class="md-form mb-1">
+								<label data-error="wrong" data-success="right" for="editFirstName">First Name</label>
+								<input type="text" name="editFirstName" class="form-control validate" value="{{first_name}}" required>
+							</div>
+
+							<div class="md-form mb-1">
+								<label data-error="wrong" data-success="right" for="editLastName">Last Name</label>
+								<input type="text" name="editLastName" class="form-control validate" value="{{last_name}}" required>
+							</div>
+						</div>
+						<div class="modal-footer d-flex justify-content-center updateInsideWrapper">
+							<button type="submit" class="btn btn-secondary btn-block updateInside">
+								Confirm Changes
+								<i class="fas fa-paper-plane-o ml-1"></i>
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	{{/each}}
+</div> 

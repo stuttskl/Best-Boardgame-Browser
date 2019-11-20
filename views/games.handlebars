@@ -1,4 +1,130 @@
-<div class='container'>
+<div class="container" id='containerbg'>
+	<h1>Games Database</h1>
+
+	<!-- Search bar -->
+	<form class="" action="/games/search" method="get">
+		<div class="form-row">
+			<div class="form-group col-md-7">
+				<input name="search" class="form-control" type="text" placeholder="Search" aria-label="Search">
+			</div>
+			<div class="form-group col-md-3">
+				<select class="form-control" name="filter">
+					<option value="game_name">Game Name</option>
+					<option value="game_category">Game Category</option>
+				</select>
+			</div>
+			<div class="form-group col-md-2">
+				<button type="submit" class="btn btn-primary btn-block">Search</button>
+			</div>
+		</div>
+	</form>
+
+	<!-- Add Account -->
+
+	<button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#addaccount" aria-expanded="false" aria-controls="addaccount">
+		Add Game
+	</button><br />
+	<div class="collapse" id="addaccount">
+		<form action="/games/add" method="post">
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<input type="text" class="form-control" name="new_game_name" placeholder="Game Name">
+				</div>
+				<div class="form-group col-md-6">
+					<input type="text" class="form-control" name="new_game_category" placeholder="Game Category">
+				</div>
+        <div class="form-group col-md-6">
+					<input type="number" class="form-control" name="new_min_players" placeholder="Min Players">
+				</div>
+        <div class="form-group col-md-6">
+					<input type="number" class="form-control" name="new_max_players" placeholder="Max Players">
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+	</div>
+
+	<hr>
+
+	<!-- Display Player Data -->
+
+	<div class="table-responsive">
+		<table class='table'>
+			<thead>
+				<tr>
+					<th>Game Name</th>
+					<th>Game Category</th>
+          <th>Minimum Players</th>
+			    <th>Maximum Players</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each player}}
+				<tr>
+					<td>{{game_name}}</td>
+          <td>{{game_category}}</td>
+          <td>{{min_players}}</td>
+          <td>{{max_players}}</td>
+					<td><button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalUpdate{{id}}">Update</button></td>
+					<td>
+						<form action="players/delete" method="post">
+							<input type="hidden" name="deleteID" value="{{id}}">
+							<button type="submit" class="btn btn-danger">Delete</button>
+						</form>
+					</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+
+	<!-- Edit Pop Up (called Modal) -->
+{{#each player}}
+	<div class="row d-flex justify-content-center modalWrapper">
+		<div class="modal fade modalUpdateClass" id="modalUpdate{{id}}" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<form action="/players/update" method="post">
+						<input type="hidden" name="updateID" value="{{id}}">
+						<div class="modal-header text-center">
+							<h4 class="modal-title w-100 font-weight-bold ml-5">Update Entry</h4>
+							<button type="button" class="close text-secondary" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body mx-3">
+							<div class="md-form mb-1">
+								<label data-error="wrong" data-success="right" for="editGameName">Game Name</label>
+								<input type="text" name="editGameName" class="form-control validate" value="{{game_name}}" required>
+							</div>
+							<div class="md-form mb-1">
+								<label data-error="wrong" data-success="right" for="editGameCategory">Last Name</label>
+								<input type="text" name="editGameCategory" class="form-control validate" value="{{game_category}}" required>
+							</div>
+              <div class="md-form mb-1">
+								<label data-error="wrong" data-success="right" for="editMinPlayers">Minumum Number of Players</label>
+								<input type="text" name="editMinPlayers" class="form-control validate" value="{{min_players}}" required>
+							</div>
+              <div class="md-form mb-1">
+								<label data-error="wrong" data-success="right" for="editMaxPlayers">Maximum Number of Players</label>
+								<input type="text" name="editMaxPlayers" class="form-control validate" value="{{max_players}}" required>
+							</div>
+						</div>
+						<div class="modal-footer d-flex justify-content-center updateInsideWrapper">
+							<button type="submit" class="btn btn-secondary btn-block updateInside">
+								Confirm Changes
+								<i class="fas fa-paper-plane-o ml-1"></i>
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	{{/each}}
+</div> 
+
+{{!-- <div class='container'>
   <h1>List of All Games</h1>
 	<table class='table'>
 		<thead>
@@ -15,9 +141,9 @@
         <td>{{this.max_players}}</td>
 			</tbody>
 		{{/each}}               
-	</table>
+	</table> --}}
 
-  <div class="container">
+  {{!-- <div class="container">
   <h1>Add A New Game to Player Library</h1>
     <form action="games_add" method="post">
       <div class="form-group">
@@ -33,4 +159,4 @@
       </div>
     </form>
 </div>
-</div>	
+</div>	 --}}
