@@ -1,6 +1,39 @@
-<div class="container" id='containerbg'>
-	<h1>Player Database</h1>
+<!-- navbar stuff -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button> <a class="navbar-brand" href="https://www.boardgamegeek.com/">&nbsp BGB &nbsp </a>
+		<!--GROUP BUTTONS-->
+			<div class="btn-group" role="group" aria-label="Basic example">
+				<a role="button" href="/" class="btn btn-outline-warning my-2 my-sm-0">&nbsp HOME &nbsp</a>
+		<!--PLAYERS BUTTON-->
+				<div class="btn-group" role="group">
+					<a role="button" class="btn btn-warning" href = "/players">
+						&nbsp PLAYERS &nbsp
+					</a>
+				</div>
+		<!--GAMES BUTTON-->
+				<div class="btn-group" role="group">
+					<a role="button" class="btn btn-outline-warning my-2 my-sm-0" href = "/games">
+						&nbsp GAMES &nbsp
+					</a>
+				</div>
+		<!--GROUPS BUTTON-->
+				<div class="btn-group" role="group">
+					<a role="button" class="btn btn-outline-warning my-2 my-sm-0" href = "/groups">
+						&nbsp GROUPS &nbsp
+					</a>
+				</div>
+			</div>
+	<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+		</ul>
+	</div>
+</nav>
 
+<div class="container" id='playerContainer'>
+	<h1>Player Database</h1>
+	<!--PLAYER SEARCH-->
 	<form class="" action="/players/search" method="get">
 		<div class="form-row">
 			<div class="form-group col-md-7">
@@ -18,9 +51,11 @@
 		</div>
 	</form>
 
+	<!--PLAYER ADD-->
 	<button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#addaccount" aria-expanded="false" aria-controls="addaccount">
-		Add Player
-	</button><br />
+		Add a new Player
+	</button>
+	<br/>
 	<div class="collapse" id="addaccount">
 		<form action="/players/add" method="post">
 			<div class="form-row">
@@ -35,14 +70,13 @@
 		</form>
 	</div>
 
+	<!--PLAYER TABLE-->
 	<div class="table-responsive">
 		<table class='table'>
 			<thead>
 				<tr>
 					<th>First Name</th>
 					<th>Last Name</th>
-					<th>Update</th>
-					<th>Delete</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -51,11 +85,13 @@
 					<td class="hidden">{{id}}</td>
 					<td>{{first_name}}</td>
 					<td>{{last_name}}</td>
-					<td><button type="button" class="btn btn-dark" data-toggle="modal" data-target="#modalUpdate{{id}}">Update</button></td>
+					<td>
+						<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#playerUpdate{{id}}"> Update </button>
+					</td>
 					<td>
 						<form action="players/delete" method="post">
 							<input type="hidden" name="deleteID" value="{{id}}">
-							<button type="submit" class="btn btn-danger">Delete</button>
+							<button type="submit" class="btn btn-danger"> Delete</button>
 						</form>
 					</td>
 				</tr>
@@ -64,15 +100,16 @@
 		</table>
 	</div>
 
+	<!--PLAYER UPDATE-->
   {{#each player}}
 	<div class="row d-flex justify-content-center modalWrapper">
-		<div class="modal fade modalUpdateClass" id="modalUpdate{{id}}" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal fade modalUpdateClass" id="playerUpdate{{id}}" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<form action="/players/update" method="post">
 						<input type="hidden" name="updateID" value="{{id}}">
 						<div class="modal-header text-center">
-							<h4 class="modal-title w-100 font-weight-bold ml-5">Update Entry</h4>
+							<h4 class="modal-title w-100 font-weight-bold ml-5"> Update Entry</h4>
 							<button type="button" class="close text-secondary" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -82,7 +119,6 @@
 								<label data-error="wrong" data-success="right" for="editFirstName">First Name</label>
 								<input type="text" name="editFirstName" class="form-control validate" value="{{first_name}}" required>
 							</div>
-
 							<div class="md-form mb-1">
 								<label data-error="wrong" data-success="right" for="editLastName">Last Name</label>
 								<input type="text" name="editLastName" class="form-control validate" value="{{last_name}}" required>
@@ -100,4 +136,4 @@
 		</div>
 	</div>
 	{{/each}}
-</div> 
+</div>

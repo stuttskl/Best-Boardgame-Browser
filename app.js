@@ -21,7 +21,7 @@ app.get('/', function(req, res, next) {
 
 app.use('/players', require('./public/js/players.js'));
 app.use('/games', require('./public/js/games.js'));
-// app.use('/groups', require('./public/js/groups.js'));
+app.use('/groups', require('./public/js/groups.js'));
 // app.use('/categories', require('./public/js/categories.js'));
 
 // Error handling route
@@ -29,7 +29,7 @@ app.use(function (req, res) {
     res.status(404);
     res.render('404');
 });
-  
+
 app.use(function (err, req, res, next) {
     console.error(err.stack);
     res.type('plain/text');

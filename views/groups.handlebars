@@ -1,24 +1,134 @@
-<div class="container">
-	<h1>List of All Groups</h1>
-	<table class='table'>
-		<thead>
-			<th>Group Name</th>
-			<th>Group Members</th>
-		</thead>
-		{{#each data}}
-			<tbody>
-				<td>{{this.group_name}}</td>
-				<td>{{this.first_name}}, {{this.last_name}}</td>
-			</tbody>
-		{{/each}}               
-	</table>
-
-		<h1>Add A New Group</h1>
-    <form action="groups_add" method="post">
-      <div class="form-group">
-        <input type="text" class="form-control" id="" name="group_name" aria-describedby="" placeholder="Group Name">
-      </div>
-        <input type="submit" value="Submit" class="ylw-btn"></input>
-    </form>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button> <a class="navbar-brand" href="https://www.boardgamegeek.com/">&nbsp BGB &nbsp </a>
+		<!--GROUP BUTTONS-->
+			<div class="btn-group" role="group" aria-label="Basic example">
+				<a role="button" href="/" class="btn btn-outline-warning my-2 my-sm-0">&nbsp HOME &nbsp</a>
+		<!--PLAYERS BUTTON-->
+				<div class="btn-group" role="group">
+					<a role="button" class="btn btn-outline-warning my-2 my-sm-0" href = "/players">
+						&nbsp PLAYERS &nbsp
+					</a>
+				</div>
+		<!--GAMES BUTTON-->
+				<div class="btn-group" role="group">
+					<a role="button" class="btn btn-outline-warning my-2 my-sm-0" href = "/games">
+						&nbsp GAMES &nbsp
+					</a>
+				</div>
+		<!--GROUPS BUTTON-->
+				<div class="btn-group" role="group">
+					<a role="button" class="btn btn-warning" href = "/groups">
+						&nbsp GROUPS &nbsp
+					</a>
+				</div>
+			</div>
+	<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+		</ul>
 	</div>
+</nav>
+
+<div class="container" id='groupContainer'>
+	<h1>Groups Database</h1>
+	<!--GROUP SEARCH-->
+	<form class="" action="/groups/search" method="get">
+		<div class="form-row">
+			<div class="form-group col-md-7">
+				<input name="search" class="form-control" type="text" placeholder="Search" aria-label="Search">
+			</div>
+			<div class="form-group col-md-3">
+				<select class="form-control" name="filter">
+					<option value="group_name">Group Name</option>
+				</select>
+			</div>
+			<div class="form-group col-md-2">
+				<button type="submit" class="btn btn-primary btn-block">Search</button>
+			</div>
+		</div>
+	</form>
+
+	<!--ADD GROUP-->
+	<button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#addGroup" aria-expanded="false" aria-controls="addaccount">
+		Add a New Group
+	</button>
+	<br/>
+	<div class="collapse" id="addGroup">
+		<form action="/groups/add" method="post">
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<input type="text" class="form-control" name="new_group_name" placeholder="Group Name">
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+	</div>
+
+	<!--GROUP TABLE-->
+	<div class = "table-responsive">
+		<table class='table'>
+			<thead>
+				<tr>
+					<th>Group Name</th>
+					<th>Number of Players</th>
+					<th>Update</th>
+					<th>Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each groups}}
+				<tr>
+					<td class="hidden">{{id}}</td>
+					<td>{{group_name}}</td>
+					<td><!--number of players--></td>
+					<td>
+						<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#groupUpdate{{id}}"> Update </button>
+					</td>
+					<td>
+						<form action="groups/delete" method="post">
+							<input type="hidden" name="deleteID" value="{{id}}">
+							<button type="submit" class="btn btn-danger">
+								Delete </button>
+						</form>
+					</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+
+	<!--GROUP UPDATE-->
+	{{#each groups}}
+	<div class="row d-flex justify-content-center modalWrapper">
+		<div class="modal fade modalUpdateClass" id="groupUpdate{{id}}" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<form action="/groups/update" method="post">
+						<input type="hidden" name="updateID" value="{{id}}">
+						<div class="modal-header text-center">
+							<h4 class="modal-title w-100 font-weight-bold ml-5">Update Entry</h4>
+							<button type="button" class="close text-secondary" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body mx-3">
+							<div class="md-form mb-1">
+								<label data-error="wrong" data-success="right" for="editGroupName">Group Name</label>
+								<input type="text" name="editGroupName" class="form-control validate" value="{{group_name}}" required>
+							</div>
+						</div>
+						<div class="modal-footer d-flex justify-content-center updateInsideWrapper">
+							<button type="submit" class="btn btn-secondary btn-block updateInside">
+								Confirm Changes
+								<i class="fas fa-paper-plane-o ml-1"></i>
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	{{/each}}
+
 </div>
