@@ -2,27 +2,27 @@ module.exports = function () {
 	var express = require('express');
 	var router = express.Router();
 
-  function getGroups(res, mysql, context, complete) {
-    mysql.pool.query("SELECT id, group_name FROM groups", function (err, results) {
+  function getCategory(res, mysql, context, complete) {
+    mysql.pool.query("SELECT id, category FROM category", function (err, results) {
       if (err) {
         res.write(JSON.stringify(err));
         res.end();
       }
-      context.groups = results;
+      context.category = results;
       complete();
     });
   };
 
 	function searchFunction(req, res, mysql, context, complete) {
 		//sanitize the input as well as include the % character
-		var query = "SELECT id, group_name FROM groups WHERE " + req.query.filter + " LIKE " + mysql.pool.escape('%' + req.query.search + '%');
+		var query = "SELECT * FROM games  LEFT JOIN game_category ON game_id = games.id WHERE category.id = " + req.body.seeGamesID;
 		console.log(query)
 		mysql.pool.query(query, function (err, results) {
 			if (err) {
 				res.write(JSON.stringify(err));
 				res.end();
 			}
-			context.groups = results;
+			context.games = results;
 			complete();
 		});
 	};
@@ -31,11 +31,11 @@ module.exports = function () {
 		var callbackCount = 0;
 		var context = {};
 		var mysql = req.app.get('mysql');
-		getGroups(res, mysql, context, complete);
+		getCategory(res, mysql, context, complete);
 		function complete() {
 			callbackCount++;
 			if (callbackCount >= 1) {
-				res.render('groups', context);
+				res.render('category', context);
 			};
 		};
 	});
@@ -49,7 +49,7 @@ module.exports = function () {
 		function complete() {
 			callbackCount++;
 			if (callbackCount >= 1) {
-				res.render('groups', context);
+				res.render('category', context);
 			};
 		};
 	});
@@ -57,15 +57,15 @@ module.exports = function () {
 	router.post('/add', function (req, res) {
 		console.log(req.body)
 		var mysql = req.app.get('mysql');
-		var sql = "INSERT INTO groups (`group_name`) VALUES (?)";
-		var inserts = [req.body.new_group_name];
+		var sql = "INSERT INTO category (`category`) VALUES (?)";
+		var inserts = [req.body.new_category_name];
 		sql = mysql.pool.query(sql, inserts, function (err, results) {
 			if (err) {
 				console.log(JSON.stringify(error))
 				res.write(JSON.stringify(error));
 				res.end();
 			} else {
-				res.redirect('/groups');
+				res.redirect('/category');
 			}
 		});
 	});
@@ -73,23 +73,23 @@ module.exports = function () {
 	router.post('/update', function (req, res) {
 		console.log(req.body)
 		var mysql = req.app.get('mysql');
-		var sql = "UPDATE groups SET group_name = ? WHERE id = ?";
-		var inserts = [req.body.editGroupName, req.body.updateID];
+		var sql = "UPDATE category SET category = ? WHERE id = ?";
+		var inserts = [req.body.editCategoryName, req.body.updateID];
 		sql = mysql.pool.query(sql, inserts, function (err, results) {
 			if (err) {
 				console.log(JSON.stringify(err))
 				res.write(JSON.stringify(err));
 				res.end();
 			} else {
-				res.redirect('/groups');
+				res.redirect('/category');
 			}
 		});
 	});
 
 	router.post('/delete', function (req, res) {
 		var mysql = req.app.get('mysql');
-		var sql = "DELETE FROM groups WHERE id = ?";
-		var inserts = [req.body.deleteGroupID];
+		var sql = "DELETE FROM category WHERE id = ?";
+		var inserts = [req.body.deleteCategoryID];
 		sql = mysql.pool.query(sql, inserts, function (err, results) {
 			if (err) {
 				console.log(err)
@@ -97,7 +97,7 @@ module.exports = function () {
 				res.status(400);
 				res.end();
 			} else {
-				res.redirect('/groups');
+				res.redirect('/category');
 			}
 		});
 	});

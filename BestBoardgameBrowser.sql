@@ -281,8 +281,6 @@ ALTER TABLE `player_groups`
 --
 -- AUTO_INCREMENT for dumped tables
 --
-
---
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
@@ -293,6 +291,7 @@ ALTER TABLE `category`
 --
 ALTER TABLE `games`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  ON DELETE CASCADE;
 
 --
 -- AUTO_INCREMENT for table `game_category`
@@ -305,12 +304,14 @@ ALTER TABLE `game_category`
 --
 ALTER TABLE `groups`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  ON DELETE CASCADE;
 
 --
 -- AUTO_INCREMENT for table `players`
 --
 ALTER TABLE `players`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  ON DELETE CASCADE;
 
 --
 -- AUTO_INCREMENT for table `player_games`

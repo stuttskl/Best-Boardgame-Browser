@@ -44,7 +44,6 @@ module.exports = function () {
 		var callbackCount = 0;
 		var context = {};
 		var mysql = req.app.get('mysql');
-
 		searchFunction(req, res, mysql, context, complete);
 		function complete() {
 			callbackCount++;
@@ -89,7 +88,7 @@ module.exports = function () {
 	router.post('/delete', function (req, res) {
 		var mysql = req.app.get('mysql');
 		var sql = "DELETE FROM games WHERE id = ?";
-		var inserts = [req.body.deleteID];
+		var inserts = [req.body.deleteGID];
 		sql = mysql.pool.query(sql, inserts, function (err, results) {
 			if (err) {
 				console.log(err)
