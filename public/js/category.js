@@ -15,7 +15,7 @@ module.exports = function () {
 
 	function searchFunction(req, res, mysql, context, complete) {
 		//sanitize the input as well as include the % character
-		var query = "SELECT * FROM games  LEFT JOIN game_category ON game_id = games.id WHERE category.id = " + req.body.seeGamesID;
+		var query = "SELECT * FROM games JOIN game_category ON game_id = games.id WHERE category_id = 7";
 		console.log(query)
 		mysql.pool.query(query, function (err, results) {
 			if (err) {
@@ -26,6 +26,41 @@ module.exports = function () {
 			complete();
 		});
 	};
+
+	router.get('/listGames', function (req, res) {
+		var context = {};
+		var mysql = req.app.get('mysql');
+		console.log("in listGames search")
+		var sql = "SELECT * FROM games JOIN game_category ON game_id = games.id WHERE category_id = ?";
+		var inserts = [req.body.seeGamesID];
+		sql = mysql.pool.query(sql, inserts, function (err, results) {
+			if (err) {
+				console.log(err)
+				res.write(JSON.stringify(err));
+				res.status(400);
+				res.end();
+			} else {
+				console.log("in listGames result")
+				context.games = results;
+			}
+		});
+	});
+
+	// router.post('/delete', function (req, res) {
+	// 	var mysql = req.app.get('mysql');
+	// 	var sql = "DELETE FROM category WHERE id = ?";
+	// 	var inserts = [req.body.deleteCategoryID];
+	// 	sql = mysql.pool.query(sql, inserts, function (err, results) {
+	// 		if (err) {
+	// 			console.log(err)
+	// 			res.write(JSON.stringify(err));
+	// 			res.status(400);
+	// 			res.end();
+	// 		} else {
+	// 			res.redirect('/category');
+	// 		}
+	// 	});
+	// });
 
 	router.get('/', function (req, res) {
 		var callbackCount = 0;
@@ -49,7 +84,7 @@ module.exports = function () {
 		function complete() {
 			callbackCount++;
 			if (callbackCount >= 1) {
-				res.render('category', context);
+				res.render('games', context);
 			};
 		};
 	});
@@ -79,22 +114,6 @@ module.exports = function () {
 			if (err) {
 				console.log(JSON.stringify(err))
 				res.write(JSON.stringify(err));
-				res.end();
-			} else {
-				res.redirect('/category');
-			}
-		});
-	});
-
-	router.post('/delete', function (req, res) {
-		var mysql = req.app.get('mysql');
-		var sql = "DELETE FROM category WHERE id = ?";
-		var inserts = [req.body.deleteCategoryID];
-		sql = mysql.pool.query(sql, inserts, function (err, results) {
-			if (err) {
-				console.log(err)
-				res.write(JSON.stringify(err));
-				res.status(400);
 				res.end();
 			} else {
 				res.redirect('/category');

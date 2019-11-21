@@ -87,10 +87,10 @@
 				{{#each player}}
 				<tr>
 					<td class="hidden">{{id}}</td>
-					<td>{{first_name}}</td>
-					<td>{{last_name}}</td>
+					<td class="td-padded">{{first_name}}</td>
+					<td class="td-padded">{{last_name}}</td>
 					<td>
-						<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#playerUpdate{{id}}"> Update </button>
+						<button type="button" class="btn btn-warning btn-padded" data-toggle="modal" data-target="#playerUpdate{{id}}"> Update </button>
 					</td>
 					<td>
 						<form action="players/delete" method="post">
