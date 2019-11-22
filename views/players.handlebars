@@ -1,4 +1,4 @@
-<!-- navbar stuff -->
+{{!-- <!-- navbar stuff -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -33,7 +33,7 @@
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
     </ul>
   </div>
-</nav>
+</nav> --}}
 
 <div class="container" id='playerContainer'>
   <h1>Player Database</h1>
@@ -69,7 +69,7 @@
     <div class="form-group col-md-3">
       <select class="form-control" name="filter">
         <option value="">Select Game</option>
-        {{#each game}}
+        {{#each playersAndGames}}
         <option value="{{game_name}}">{{game_name}}</option>
         {{/each}}
       </select>
@@ -77,6 +77,10 @@
     <button type="submit" class="btn btn-primary">Submit</button>
   </div>
 </form>
+
+{{#each playersAndGames}}
+{{game_name}}
+{{/each}}
 
   <!--PLAYER ADD-->
   <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#addaccount" aria-expanded="false" aria-controls="addaccount">
@@ -181,7 +185,7 @@
           <form action="/players/update" method="post">
             <input type="hidden" name="playerCardID" value="{{id}}">
             <div class="modal-header text-center">
-              <h4 class="modal-title w-100 font-weight-bold ml-5"> Player Information</h4>
+              <h4 class="modal-title w-100 font-weight-bold ml-5">{{first_name}} {{last_name}}</h4>
               <button type="button" class="close text-secondary" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -191,7 +195,6 @@
                   <img class="player-img" src="{{img}}">
                 </div>
                 <div class="col-md-6">
-                <p>Player Info For: {{first_name}} {{last_name}}</p>
                 <p>Favorite Game: Spyfall</p> <!-- game they own -->
                 <p>Team: Team Gryffindor</p> <!-- team they are on -->
                 </div>
