@@ -50,3 +50,8 @@ footer {
     bottom: 0;
     width: 100%;
 }
+
+.player-img {
+  width: 100px;
+  border-radius: 80%;
+}
