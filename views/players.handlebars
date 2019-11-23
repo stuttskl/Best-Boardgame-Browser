@@ -1,8 +1,8 @@
 <!-- navbar stuff -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button> <a class="navbar-brand" href="https://www.boardgamegeek.com/">&nbsp BGB &nbsp </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button> a class="navbar-brand" href="https://www.boardgamegeek.com/">&nbsp BGB &nbsp </a>
 		<!--GROUP BUTTONS-->
 			<div class="btn-group" role="group" aria-label="Basic example">
 				<a role="button" href="/" class="btn btn-outline-warning my-2 my-sm-0">&nbsp HOME &nbsp</a>
@@ -35,10 +35,10 @@
 	</div>
 </nav>
 
-<div class="container" id='playerContainer'>
+<div class="container" id="playerContainer">
 	<h1>Player Database</h1>
 	<!--PLAYER SEARCH-->
-	<form class="" action="/players/search" method="get">
+	<form action="/players/search" method="get">
 		<div class="form-row">
 			<div class="form-group col-md-7">
 				<input name="search" class="form-control" type="text" placeholder="Search" aria-label="Search">
@@ -50,38 +50,36 @@
 				</select>
 			</div>
 			<div class="form-group col-md-2">
-				<button type="submit" class="btn btn-primary btn-block">Search</button>
+				<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
 			</div>
 		</div>
 	</form>
 
-<h1>Add A Game to A Player's Library</h1>
-<form>
-  <div class="form-group">
-    <div class="form-group col-md-3">
-      <select class="form-control" name="filter">
-        <option value="">Select Player</option>
-        {{#each players}}
-        <option value="{{first_name}}">{{first_name}}, {{last_name}}</option>
-        {{/each}}
-      </select>
-    </div>
-    <div class="form-group col-md-3">
-      <select class="form-control" name="filter">
-        <option value="">Select Game</option>
-        {{#each games}}
-        <option value="{{game_name}}">{{game_name}}</option>
-        {{/each}}
-      </select>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </div>
-</form>
+  <h1>Add A Game to A Player's Library</h1>
+  <form>
+    <div class="form-group">
+      <div class="form-group col-md-3">
+        <select class="form-control" name="filter">
+          <option value="select-player">Select Player</option>
+          {{#each players}}
+            <option value="{{first_name}}">{{first_name}}, {{last_name}}</option>
+          {{/each}}
+        </select>
+      </div>
+      <div class="form-group col-md-3">
+        <select class="form-control" name="filter">
+          <option value="select-game">Select Game</option>
+          {{#each games}}
+            <option value="{{game_name}}">{{game_name}}</option>
+          {{/each}}
+        </select>
+      </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+  </form>
 
   <!--PLAYER ADD-->
-  <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#addaccount" aria-expanded="false" aria-controls="addaccount">
-    Add a new Player
-  </button>
+  <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#addaccount" aria-expanded="false" aria-controls="addaccount">Add a new Player</button>
   <br/>
   <div class="collapse" id="addaccount">
     <form action="/players/add" method="post">
@@ -104,9 +102,9 @@
         <tr>
           <th>First Name</th>
           <th>Last Name</th>
-          <th></th>
-          <th></th>
-          <th></th>
+          <th>Player Card</th>
+          <th>Edit</th>
+          <th>Delete</th>
         </tr>
       </thead>
       <tbody>
@@ -116,15 +114,15 @@
           <td class="td-padded">{{first_name}}</td>
           <td class="td-padded">{{last_name}}</td>
           <td>
-            <button type="button" class="btn btn-warning btn-padded" data-toggle="modal" data-target="#playerCard{{id}}">Player Card</button>
+            <button type="button" class="btn btn-warning btn-padded" data-toggle="modal" data-target="#playerCard{{id}}"><span class="glyphicon glyphicon-user"></span></button>
           </td>
           <td>
-            <button type="button" class="btn btn-warning btn-padded" data-toggle="modal" data-target="#playerUpdate{{id}}"> Update </button>
+            <button type="button" class="btn btn-warning btn-padded" data-toggle="modal" data-target="#playerUpdate{{id}}"><span class="glyphicon glyphicon-pencil"></span> </button>
           </td>
           <td>
             <form action="players/delete" method="post">
               <input type="hidden" name="deleteID" value="{{id}}">
-              <button type="submit" class="btn btn-danger"> Delete</button>
+              <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
             </form>
           </td>
         </tr>
@@ -169,7 +167,9 @@
 		</div>
 	</div>
 	{{/each}}
-</div>
+  </div>
+
+{{!-- PLAYER CARD --}}
  {{#each players}}
   <div class="row d-flex justify-content-center modalWrapper">
     <div class="modal fade modalUpdateClass" id="playerCard{{id}}" tabindex="-1" role="dialog" aria-hidden="true">
@@ -188,7 +188,7 @@
                   <img class="player-img" src="{{img}}">
                 </div>
                 <div class="col-md-6">
-                <p>Favorite Game: Spyfall</p> <!-- game they own -->
+                <p>Favorite Game: </p> <!-- game they own -->
                 <p>Team: Team Gryffindor</p> <!-- team they are on -->
                 </div>
               </div>
@@ -199,4 +199,4 @@
     </div>
   </div>
   {{/each}}
-</div>
+  </div>

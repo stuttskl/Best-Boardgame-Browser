@@ -1,9 +1,8 @@
 var express = require('express');
 var mysql = require('./dbcon.js');
 var morgan = require('morgan');
-var async = require('async');
 var app = express();
-var handlebars = require('express-handlebars').create({defaultLayout:'main'});
+var handlebars = require('express-handlebars').create( {defaultLayout:'main'} );
 var bodyParser = require('body-parser');
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -27,17 +26,17 @@ app.use('/category', require('./public/js/category.js'));
 
 // Error handling route
 app.use(function (req, res) {
-    res.status(404);
-    res.render('404');
+  res.status(404);
+  res.render('404');
 });
 
 app.use(function (err, req, res, next) {
-    console.error(err.stack);
-    res.type('plain/text');
-    res.status(500);
-    res.render('500');
+  console.error(err.stack);
+  res.type('plain/text');
+  res.status(500);
+  res.render('500');
 });
 
 app.listen(app.get('port'), function() {
-    console.log('server listening on: flip2.engr.oregonstate.edu:' + app.get('port') + '; press Ctrl-C to terminate.');
+  console.log('server listening on: flip2.engr.oregonstate.edu:' + app.get('port') + '; press Ctrl-C to terminate.');
 });

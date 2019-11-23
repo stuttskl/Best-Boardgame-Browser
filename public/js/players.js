@@ -28,7 +28,6 @@ module.exports = function () {
 	function searchFunction(req, res, mysql, context, complete) {
 		//sanitize the input as well as include the % character
 		var query = "SELECT id, first_name, last_name FROM players WHERE " + req.query.filter + " LIKE " + mysql.pool.escape('%' + req.query.search + '%');
-		// console.log(query)
 		mysql.pool.query(query, function (err, results) {
 			if (err) {
 				res.write(JSON.stringify(err));
@@ -86,7 +85,7 @@ module.exports = function () {
 	});
 
 	router.post('/update', function (req, res) {
-		console.log(req.body)
+		// console.log(req.body)
 		var mysql = req.app.get('mysql');
 		var sql = "UPDATE players SET first_name = ?, last_name= ? WHERE id = ?";
 		var inserts = [req.body.editFirstName, req.body.editLastName, req.body.updateID];
