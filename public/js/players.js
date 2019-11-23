@@ -1,43 +1,58 @@
 module.exports = function () {
 	var express = require('express');
 	var router = express.Router();
+  var async = require('async');
 
-  function getPlayers(res, mysql, context, complete) {
-    mysql.pool.query("SELECT id, first_name, last_name, img FROM players;", function (error, results) {
-      if (error) {
-        res.write(JSON.stringify(error));
-        res.end();
-      }
-      context.player = results;
-      complete();
-    });
-  };
+  function getAllPlayers(mysql) {
+    return function(callback) {
+      mysql.pool.query('SELECT id, first_name, last_name, img FROM players;', function(err, data1) {
+        if (err) {
+          return callback(err, []);
+        }
+        return callback(null, data1);
+      });
+    }
+  }
+
+  function getAllGames(mysql) {
+    return function(callback) {
+      mysql.pool.query('SELECT id, game_name, max_players, min_players FROM games;', function(err, data2) {
+        if (err) {
+          return callback(err, []);
+        }
+        return callback(null, data2);
+      });
+    }
+  }
 
 	function searchFunction(req, res, mysql, context, complete) {
 		//sanitize the input as well as include the % character
 		var query = "SELECT id, first_name, last_name FROM players WHERE " + req.query.filter + " LIKE " + mysql.pool.escape('%' + req.query.search + '%');
-		console.log(query)
+		// console.log(query)
 		mysql.pool.query(query, function (err, results) {
 			if (err) {
 				res.write(JSON.stringify(err));
 				res.end();
 			}
-			context.player = results;
+			context.players = results;
 			complete();
 		});
 	};
 
 	router.get('/', function (req, res) {
-		var callbackCount = 0;
-		var context = {};
 		var mysql = req.app.get('mysql');
-		getPlayers(res, mysql, context, complete);
-		function complete() {
-			callbackCount++;
-			if (callbackCount >= 1) {
-				res.render('players', context);
-			};
-		};
+    async.parallel(
+      {
+        players: getAllPlayers(mysql),
+        games: getAllGames(mysql)
+      },
+      function(err, results) {
+        if (err) {
+          console.log(err.message);
+        }
+        res.render('players', results); // { players: [], games: [] }
+      }
+    );
 	});
 
 	router.get('/search', function (req, res) {
@@ -55,7 +70,7 @@ module.exports = function () {
 	});
 
 	router.post('/add', function (req, res) {
-		console.log(req.body)
+		// console.log(req.body)
 		var mysql = req.app.get('mysql');
 		var sql = "INSERT INTO players (`first_name`, `last_name`) VALUES (?, ?)";
 		var inserts = [req.body.new_first_name, req.body.new_last_name];

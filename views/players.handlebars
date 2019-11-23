@@ -61,7 +61,7 @@
     <div class="form-group col-md-3">
       <select class="form-control" name="filter">
         <option value="">Select Player</option>
-        {{#each player}}
+        {{#each players}}
         <option value="{{first_name}}">{{first_name}}, {{last_name}}</option>
         {{/each}}
       </select>
@@ -69,7 +69,7 @@
     <div class="form-group col-md-3">
       <select class="form-control" name="filter">
         <option value="">Select Game</option>
-        {{#each playersAndGames}}
+        {{#each games}}
         <option value="{{game_name}}">{{game_name}}</option>
         {{/each}}
       </select>
@@ -77,10 +77,6 @@
     <button type="submit" class="btn btn-primary">Submit</button>
   </div>
 </form>
-
-{{#each playersAndGames}}
-{{game_name}}
-{{/each}}
 
   <!--PLAYER ADD-->
   <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#addaccount" aria-expanded="false" aria-controls="addaccount">
@@ -114,7 +110,7 @@
         </tr>
       </thead>
       <tbody>
-        {{#each player}}
+        {{#each players}}
         <tr>
           <td class="hidden">{{id}}</td>
           <td class="td-padded">{{first_name}}</td>
@@ -138,7 +134,7 @@
   </div>
 
 	<!--PLAYER UPDATE-->
-  {{#each player}}
+  {{#each players}}
 	<div class="row d-flex justify-content-center modalWrapper">
 		<div class="modal fade modalUpdateClass" id="playerUpdate{{id}}" tabindex="-1" role="dialog" aria-hidden="true">
 			<div class="modal-dialog" role="document">
@@ -174,8 +170,7 @@
 	</div>
 	{{/each}}
 </div>
-
- {{#each player}}
+ {{#each players}}
   <div class="row d-flex justify-content-center modalWrapper">
     <div class="modal fade modalUpdateClass" id="playerCard{{id}}" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog" role="document">
