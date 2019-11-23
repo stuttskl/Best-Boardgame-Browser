@@ -27,40 +27,21 @@ module.exports = function () {
     });
   };
 
-  // router.get('/listGames', function (req, res) {
-  //  var context = {};
-  //  var mysql = req.app.get('mysql');
-  //  console.log("in listGames search")
-  //  var inserts = [req.body.seeGamesID];
-  //   var sql = "SELECT * FROM games JOIN game_category ON game_id = games.id WHERE category_id = " + inserts;
-  //  sql = mysql.pool.query(sql, inserts, function (err, results) {
-  //    if (err) {
-  //      console.log(err)
-  //      res.write(JSON.stringify(err));
-  //      res.status(400);
-  //      res.end();
-  //    } else {
-  //      console.log("in listGames result")
-  //      context.games = results;
-  //    }
-  //  });
-  // });
-
-  // router.post('/delete', function (req, res) {
-  //  var mysql = req.app.get('mysql');
-  //  var sql = "DELETE FROM category WHERE id = ?";
-  //  var inserts = [req.body.deleteCategoryID];
-  //  sql = mysql.pool.query(sql, inserts, function (err, results) {
-  //    if (err) {
-  //      console.log(err)
-  //      res.write(JSON.stringify(err));
-  //      res.status(400);
-  //      res.end();
-  //    } else {
-  //      res.redirect('/category');
-  //    }
-  //  });
-  // });
+router.post('/delete', function (req, res) {
+   var mysql = req.app.get('mysql');
+   var sql = "DELETE FROM category WHERE id = ?";
+   var inserts = [req.body.deleteCategoryID];
+   sql = mysql.pool.query(sql, inserts, function (err, results) {
+     if (err) {
+       console.log(err)
+       res.write(JSON.stringify(err));
+       res.status(400);
+       res.end();
+     } else {
+       res.redirect('/category');
+     }
+   });
+  });
 
   router.get('/', function (req, res) {
     var callbackCount = 0;

@@ -52,7 +52,7 @@ form {
 }
 
 footer {
-    position: fixed;
+    position: absolute;
     height: 50px;
     bottom: 0;
     width: 100%;

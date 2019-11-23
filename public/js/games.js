@@ -15,7 +15,7 @@ module.exports = function () {
 
 	function searchFunction(req, res, mysql, context, complete) {
 		//sanitize the input as well as include the % character
-		var query = "SELECT id, game_name, max_players, min_players FROM games WHERE " + req.query.filter + " LIKE " + mysql.pool.escape('%' + req.query.search + '%');
+		var query = "SELECT id, game_name, max_players, min_players FROM games WHERE " + req.query.filter + " LIKE " + mysql.pool.escape(req.query.search + '%');
 		console.log(query)
 		mysql.pool.query(query, function (err, results) {
 			if (err) {
