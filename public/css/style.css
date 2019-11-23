@@ -3,6 +3,13 @@ body {
     font-family: 'Roboto Mono', monospace;
 }
 
+.btn-padded{
+  margin-top: 10px;
+}
+.td-padded{
+  margin-top: 15px;
+}
+
 #home-header-img {
     width: 90%;
 }
