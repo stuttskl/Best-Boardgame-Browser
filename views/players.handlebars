@@ -174,3 +174,34 @@
 	</div>
 	{{/each}}
 </div>
+
+ {{#each player}}
+  <div class="row d-flex justify-content-center modalWrapper">
+    <div class="modal fade modalUpdateClass" id="playerCard{{id}}" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <form action="/players/update" method="post">
+            <input type="hidden" name="playerCardID" value="{{id}}">
+            <div class="modal-header text-center">
+              <h4 class="modal-title w-100 font-weight-bold ml-5">{{first_name}} {{last_name}}</h4>
+              <button type="button" class="close text-secondary" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body mx-3">
+                <div class="col-md-4">
+                  <img class="player-img" src="{{img}}">
+                </div>
+                <div class="col-md-6">
+                <p>Favorite Game: Spyfall</p> <!-- game they own -->
+                <p>Team: Team Gryffindor</p> <!-- team they are on -->
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+</div>
