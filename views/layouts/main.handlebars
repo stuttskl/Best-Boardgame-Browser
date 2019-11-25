@@ -5,7 +5,6 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
@@ -15,9 +14,42 @@
 	  <link rel="stylesheet" type="text/css" href="/css/style.css">
   </head>
 	 <body>
-	  {{{body}}}
-    <span> &nbsp </span><br></br>
-    <span> &nbsp </span><br></br>
+    <script>
+      $(document).ready(function() {
+        // get current URL path and assign 'active' class
+        var pathname = window.location.pathname;
+        console.log(pathname)
+        $('.nav > li > a[href="'+pathname+'"]').addClass('active');
+      });
+    </script>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav" >
+      <li><a href="/">Home</a></li>
+      <li><a href="/players">Players</a></li>
+      <li><a href="/games">Games</a></li>
+      <li><a href="/groups">Groups</a></li>
+      <li><a href="/category">Game Categories</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    {{!-- <nav class="navbar navbar-dark bg-dark">
+      <ul class="nav">
+        <li><a href="/">Home</a></li>
+        <li><a href="/players">Players</a></li>
+        <li><a href="/games">Games</a></li>
+        <li><a href="/groups">Groups</a></li>
+        <li><a href="/category">Game Categories</a></li>
+      </ul>
+    </nav> --}}
+      {{{body}}}
+      <span> &nbsp </span><br></br>
+      <span> &nbsp </span><br></br>
     <footer class="py-4 bg-dark text-white-50">
       <div class="container text-center">
       <small>Copyright &copy; Katie Stutts and Zack Jaffe-Notier, 2019</small>
@@ -25,3 +57,4 @@
     </footer>
   </body>
 </html>
+

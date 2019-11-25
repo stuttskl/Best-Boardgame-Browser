@@ -18,19 +18,21 @@ h3 {
     color:#F7BE16;
 }
 
+a {
+  color: white;
+  margin: 20px;
+}
+
+
 a:hover {
     color: #ec9b3b;
     text-decoration: lowercase;
 }
 
-
-.navbar-dark .navbar-nav .show > .nav-link,
-.navbar-dark .navbar-nav .active > .nav-link,
-.navbar-dark .navbar-nav .nav-link.show,
-.navbar-dark .navbar-nav .nav-link.active {
-  color: #ec9b3b;
+.nav .active {
+  background-color: #ec9b3b;
+  color: white;
 }
-
 
 .navbar-dark .navbar-nav .nav-link {
     color: #F7BE16;
