@@ -1,6 +1,6 @@
 body {
-    /* background-color: #ec9b3b; */
-    font-family: 'Roboto Mono', monospace;
+  /* background-color: #ec9b3b; */
+  font-family: 'Roboto Mono', monospace;
 }
 
 .btn-padded{
@@ -10,12 +10,8 @@ body {
   margin-top: 15px;
 }
 
-#home-header-img {
-    width: 90%;
-}
-
 h3 {
-    color:#F7BE16;
+  color:#F7BE16;
 }
 
 a {
@@ -25,8 +21,8 @@ a {
 
 
 a:hover {
-    color: #ec9b3b;
-    text-decoration: lowercase;
+  color: #ec9b3b;
+  text-decoration: lowercase;
 }
 
 .nav .active {
@@ -35,29 +31,33 @@ a:hover {
 }
 
 .navbar-dark .navbar-nav .nav-link {
-    color: #F7BE16;
+  color: #F7BE16;
+}
+
+.navbar {
+  border-radius: 0px;
 }
 
 .ylw-btn {
-    background-color: #F7BE16;
-    border-radius: 5px;
-    margin: 3px;
-    padding: 3px;
+  background-color: #F7BE16;
+  border-radius: 5px;
+  margin: 3px;
+  padding: 3px;
 }
 
 table {
-    background-color: white;
+  background-color: white;
 }
 
 form {
-    padding: 10px;
+  padding: 10px;
 }
 
 footer {
-    position: fixed;
-    height: 50px;
-    bottom: 0;
-    width: 100%;
+  position: fixed;
+  height: 50px;
+  bottom: 0;
+  width: 100%;
 }
 
 .player-img {
