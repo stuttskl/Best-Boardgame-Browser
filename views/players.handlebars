@@ -49,10 +49,10 @@
     <form action="/players/add" method="post">
       <div class="form-row">
         <div class="form-group col-md-6">
-          <input type="text" class="form-control" name="new_first_name" placeholder="First Name">
+          <input type="text" class="form-control" name="new_first_name" placeholder="First Name" required>
         </div>
         <div class="form-group col-md-6">
-          <input type="text" class="form-control" name="new_last_name" placeholder="Last Name">
+          <input type="text" class="form-control" name="new_last_name" placeholder="Last Name" required>
         </div>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
@@ -86,7 +86,7 @@
           <td>
             <form action="players/delete" method="post">
               <input type="hidden" name="deleteID" value="{{id}}">
-              <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
+              <button type="submit" onclick="return confirmation()" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
             </form>
           </td>
         </tr>
@@ -94,6 +94,12 @@
       </tbody>
     </table>
   </div>
+
+  {{!-- <script type="text/javascript">
+    function confirmation() {
+      return confirm("Are you sure you'd like to delete this player?");
+    }
+  </script> --}}
 
 	<!--PLAYER UPDATE-->
   {{#each players}}

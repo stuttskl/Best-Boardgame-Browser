@@ -25,6 +25,10 @@
         console.log(pathname)
         $('.nav > li > a[href="'+pathname+'"]').addClass('active');
       });
+
+      function confirmation() {
+        return confirm("Are you sure you'd like to delete this player?");
+      }
     </script>
   <nav class="navbar navbar-dark bg-dark">
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -48,4 +52,5 @@
     </footer>
   </body>
 </html>
+
 
