@@ -1,9 +1,32 @@
+
 <div class="container" id='categoriesContainer'>
 	<h1>Game Categories</h1>
-
+	<!--ADD Game-Category-->
+	<h3>Add A Game to A Category</h3>
+  <form action="/category/addGameCat" method="post">
+    <div class="form-group">
+      <div class="form-group col-md-3">
+        <select class="form-control" name="category_selection">
+          <option value="select-category">Select Category</option>
+          {{#each category}}
+            <option value="{{id}}">{{category}}</option>
+          {{/each}}
+        </select>
+      </div>
+      <div class="form-group col-md-3">
+        <select class="form-control" name="game2_selection">
+          <option value="select-game">Select Game</option>
+          {{#each games}}
+            <option value="{{id}}">{{game_name}}</option>
+          {{/each}}
+        </select>
+      </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </form>
 	<!--ADD Category-->
 	<button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#addcategory" aria-expanded="false" aria-controls="addaccount">
-		Add Category
+		Add a new Category
 	</button><br />
 	<div class="collapse" id="addcategory">
 		<form action="/category/add" method="post">
@@ -15,7 +38,7 @@
 			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>
 	</div>
-
+	<span> &nbsp </span><br></br>
 <!--Category TABLE-->
 	<div class="table-responsive">
 		<table class='table'>
@@ -37,6 +60,7 @@
 							<button type="submit" class="btn btn-warning"> See Games</button>
 						</form>
 					</td>
+
 				</tr>
 				{{/each}}
 			</tbody>
