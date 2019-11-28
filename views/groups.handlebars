@@ -51,13 +51,12 @@
 					<td>{{group_name}}</td>
 					<td><!--number of players--></td>
 					<td>
-						<button type="button" class="btn btn-warning btn-padded" data-toggle="modal" data-target="#groupUpdate{{id}}"> Update </button>
+						<button type="button" class="btn btn-warning btn-padded" data-toggle="modal" data-target="#groupUpdate{{id}}"><span class="glyphicon glyphicon-pencil"></span></button>
 					</td>
 					<td>
 						<form action="groups/delete" method="post">
 							<input type="hidden" name="deleteGroupID" value="{{id}}">
-							<button type="submit" onclick="return confirmation()" class="btn btn-danger">
-								Delete</button>
+							<button type="submit" onclick="return confirmation()" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
 						</form>
 					</td>
 				</tr>

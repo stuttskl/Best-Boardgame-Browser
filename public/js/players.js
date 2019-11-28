@@ -33,7 +33,7 @@ module.exports = function () {
 				res.write(JSON.stringify(err));
 				res.end();
 			}
-			context.players = results;
+        context.players = results;
 			complete();
 		});
 	};

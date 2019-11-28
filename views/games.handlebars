@@ -67,12 +67,12 @@
           <td>{{min_players}}</td>
           <td>{{max_players}}</td>
 					<td>
-						<button type="button" class="btn btn-warning btn-padded" data-toggle="modal" data-target="#gameUpdate{{id}}"> Update </button>
+						<button type="button" class="btn btn-warning btn-padded" data-toggle="modal" data-target="#gameUpdate{{id}}"><span class="glyphicon glyphicon-pencil"></span></button>
 					</td>
 					<td>
 						<form action="games/delete" method="post">
 							<input type="hidden" name="deleteGID" value="{{id}}">
-							<button type="submit" class="btn btn-danger"> Delete</button>
+							<button type="submit" onclick="return confirmation()" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
 						</form>
 					</td>
 				</tr>
@@ -106,11 +106,11 @@
 							</div> -->
               <div class="md-form mb-1">
 								<label data-error="wrong" data-success="right" for="editMinPlayers">Minumum Number of Players</label>
-								<input type="text" name="editMinPlayers" class="form-control validate" value="{{min_players}}" required>
+								<input type="text" name="editMinPlayers" class="form-control validate" min="0" value="{{min_players}}" required>
 							</div>
               <div class="md-form mb-1">
 								<label data-error="wrong" data-success="right" for="editMaxPlayers">Maximum Number of Players</label>
-								<input type="text" name="editMaxPlayers" class="form-control validate" value="{{max_players}}" required>
+								<input type="text" name="editMaxPlayers" class="form-control validate" min="1" value="{{max_players}}" required>
 							</div>
 						</div>
 						<div class="modal-footer d-flex justify-content-center updateInsideWrapper">

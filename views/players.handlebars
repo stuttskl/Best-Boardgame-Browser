@@ -81,7 +81,7 @@
             <button type="button" class="btn btn-warning btn-padded" data-toggle="modal" data-target="#playerCard{{id}}"><span class="glyphicon glyphicon-user"></span></button>
           </td>
           <td>
-            <button type="button" class="btn btn-warning btn-padded" data-toggle="modal" data-target="#playerUpdate{{id}}"><span class="glyphicon glyphicon-pencil"></span> </button>
+            <button type="button" class="btn btn-warning btn-padded" data-toggle="modal" data-target="#playerUpdate{{id}}"><span class="glyphicon glyphicon-pencil"></span></button>
           </td>
           <td>
             <form action="players/delete" method="post">
@@ -94,12 +94,6 @@
       </tbody>
     </table>
   </div>
-
-  {{!-- <script type="text/javascript">
-    function confirmation() {
-      return confirm("Are you sure you'd like to delete this player?");
-    }
-  </script> --}}
 
 	<!--PLAYER UPDATE-->
   {{#each players}}
@@ -158,8 +152,8 @@
                   <img class="player-img" src="{{img}}">
                 </div>
                 <div class="col-md-6">
-                <p>Favorite Game: </p> <!-- game they own -->
-                <p>Team: Team Gryffindor</p> <!-- team they are on -->
+                {{!-- <p>Favorite Game: </p> <!-- game they own --> --}}
+                {{!-- <p>Team: Team Gryffindor</p> <!-- team they are on --> --}}
                 </div>
               </div>
             </div>
