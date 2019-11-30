@@ -25,6 +25,22 @@ module.exports = function () {
     }
   }
 
+	router.post('/addPlayerGame', function (req, res) {
+		// console.log(req.body)
+		var mysql = req.app.get('mysql');
+		var sql = "INSERT INTO player_games (`player_id`, `game_id`) VALUES (?, ?)";
+		var inserts = [req.body.player_selection, req.body.game_selection];
+		sql = mysql.pool.query(sql, inserts, function (err) {
+				if (err) {
+						console.log(JSON.stringify(err))
+						res.write(JSON.stringify(err));
+						res.end();
+				} else {
+						res.redirect('/players');
+				}
+		});
+});
+
 	function searchFunction(req, res, mysql, context, complete) {
 		//sanitize the input as well as include the % character
 		var query = "SELECT id, first_name, last_name FROM players WHERE " + req.query.filter + " LIKE " + mysql.pool.escape('%' + req.query.search + '%');
