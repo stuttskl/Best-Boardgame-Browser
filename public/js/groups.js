@@ -1,17 +1,56 @@
 module.exports = function () {
 	var express = require('express');
 	var router = express.Router();
+	var async = require('async');
 
-  function getGroups(res, mysql, context, complete) {
-    mysql.pool.query("SELECT id, group_name FROM groups", function (err, results) {
-      if (err) {
-        res.write(JSON.stringify(err));
-        res.end();
-      }
-      context.groups = results;
-      complete();
-    });
-  };
+  // function getGroups(res, mysql, context, complete) {
+  //   mysql.pool.query("SELECT id, group_name FROM groups", function (err, results) {
+  //     if (err) {
+  //       res.write(JSON.stringify(err));
+  //       res.end();
+  //     }
+  //     context.groups = results;
+  //     complete();
+  //   });
+  // };
+
+	function getAllGroups(mysql) {
+		return function(callback) {
+			mysql.pool.query('SELECT id, group_name FROM groups;', function(err, data1) {
+				if (err) {
+					return callback(err, []);
+				}
+				return callback(null, data1);
+			});
+		}
+	}
+
+	function getAllPlayers(mysql) {
+		return function(callback) {
+			mysql.pool.query('SELECT id, first_name, last_name, img FROM players;', function(err, data1) {
+				if (err) {
+					return callback(err, []);
+				}
+				return callback(null, data1);
+			});
+		}
+	}
+
+	router.post('/addGroupPlayer', function (req, res) {
+		// console.log(req.body)
+		var mysql = req.app.get('mysql');
+		var sql = "INSERT INTO player_groups (`player_id`, `group_id`) VALUES (?, ?)";
+		var inserts = [req.body.player_selection2, req.body.group_selection];
+		sql = mysql.pool.query(sql, inserts, function (err) {
+				if (err) {
+						console.log(JSON.stringify(err))
+						res.write(JSON.stringify(err));
+						res.end();
+				} else {
+						res.redirect('/groups');
+				}
+		});
+});
 
 	function searchFunction(req, res, mysql, context, complete) {
 		//sanitize the input as well as include the % character
@@ -28,16 +67,19 @@ module.exports = function () {
 	};
 
 	router.get('/', function (req, res) {
-		var callbackCount = 0;
-		var context = {};
 		var mysql = req.app.get('mysql');
-		getGroups(res, mysql, context, complete);
-		function complete() {
-			callbackCount++;
-			if (callbackCount >= 1) {
-				res.render('groups', context);
-			};
-		};
+    async.parallel(
+      {
+        players: getAllPlayers(mysql),
+        groups: getAllGroups(mysql)
+      },
+      function(err, results) {
+        if (err) {
+          console.log(err.message);
+        }
+        res.render('groups', results); // { players: [], games: [] }
+      }
+    );
 	});
 
 	router.get('/search', function (req, res) {
