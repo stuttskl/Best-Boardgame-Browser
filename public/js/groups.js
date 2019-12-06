@@ -36,6 +36,34 @@ module.exports = function () {
 		}
 	}
 
+	function searchForPlayers(req, res, mysql, context, complete) {
+		//sanitize the input as well as include the % character
+		var query = "SELECT * FROM players JOIN player_groups ON player_id = players.id WHERE group_id = " + req.query.seePlayersID;
+		console.log(query)
+		mysql.pool.query(query, function (err, results) {
+			if (err) {
+				res.write(JSON.stringify(err));
+				res.end();
+			}
+			context.players = results;
+			complete();
+		});
+	};
+
+	router.get('/seePlayers', function (req, res) {
+		var callbackCount = 0;
+		var context = {};
+		var mysql = req.app.get('mysql');
+
+		searchForPlayers(req, res, mysql, context, complete);
+		function complete() {
+			callbackCount++;
+			if (callbackCount >= 1) {
+				res.render('players', context);
+			};
+		};
+	});
+
 	router.post('/addGroupPlayer', function (req, res) {
 		// console.log(req.body)
 		var mysql = req.app.get('mysql');

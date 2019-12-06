@@ -64,7 +64,7 @@
 			<thead>
 				<tr>
 					<th>Group Name</th>
-					<th>Number of Players</th>
+					<th><!--Number of Players--></th>
 					<th>Update</th>
 					<th>Delete</th>
 				</tr>
@@ -74,7 +74,12 @@
 				<tr>
 					<td class="hidden">{{id}}</td>
 					<td>{{group_name}}</td>
-					<td><!--number of players--></td>
+					<td><!--number of players-->
+						<form action="groups/seePlayers" method="get">
+							<input type="hidden" name="seePlayersID" value="{{id}}">
+							<button type="submit" class="btn btn-warning">See Players</button>
+						</form>
+					</td>
 					<td>
 						<button type="button" class="btn btn-warning btn-padded" data-toggle="modal" data-target="#groupUpdate{{id}}"><span class="glyphicon glyphicon-pencil"></span></button>
 					</td>

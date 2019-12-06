@@ -24,6 +24,7 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </div>
   </form>
+
 	<!--ADD Category-->
 	<button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#addcategory" aria-expanded="false" aria-controls="addaccount">
 		Add a new Category
@@ -39,13 +40,14 @@
 		</form>
 	</div>
 	<span> &nbsp </span><br></br>
+
 <!--Category TABLE-->
 	<div class="table-responsive">
 		<table class='table'>
 			<thead>
 				<tr>
 					<th>Category</th>
-          <th>Number of Games</th>
+          <th><!--num games--></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -60,7 +62,6 @@
 							<button type="submit" class="btn btn-warning"> See Games</button>
 						</form>
 					</td>
-
 				</tr>
 				{{/each}}
 			</tbody>

@@ -30,15 +30,25 @@
         return confirm("Are you sure you'd like to delete?");
       }
     </script>
-  <nav class="navbar navbar-dark bg-dark">
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="nav">
-        <li><a href="/">Home</a></li>
-        <li><a href="/players">Players</a></li>
-        <li><a href="/games">Games</a></li>
-        <li><a href="/groups">Groups</a></li>
-        <li><a href="/category">Game Categories</a></li>
-      </ul>
+    <!--NAVBAR-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="https://www.boardgamegeek.com/"><img src="/images/headerLogov4.png" title="I'm sorry- I know this is too low" width="90" height="60">  </a>
+      <div class="nabar-header">
+        <button type = "button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarToggle3" aria-controls="navbarToggle3" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+
+      <div class="collapse navbar-collapse" id="navbarToggle3">
+        <ul class="nav">
+          <li><a href="/">Home</a></li>
+          <li><a href="/players">Players</a></li>
+          <li><a href="/games">Games</a></li>
+          <li><a href="/groups">Groups</a></li>
+          <li><a href="/category">Game Categories</a></li>
+        </ul>
+      </div>
     </div>
   </nav>
 
@@ -52,5 +62,3 @@
     </footer>
   </body>
 </html>
-
-

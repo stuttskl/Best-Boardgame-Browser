@@ -64,3 +64,8 @@ footer {
   width: 100px;
   border-radius: 80%;
 }
+
+.navbar-brand
+{
+    padding-top: 0;
+}
