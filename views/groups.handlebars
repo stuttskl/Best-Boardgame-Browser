@@ -12,7 +12,7 @@
 				</select>
 			</div>
 			<div class="form-group col-md-2">
-				<button type="submit" class="btn btn-primary btn-block">Search</button>
+				<button type="submit" class="btn btn-primary btn"><span class="glyphicon glyphicon-search"></span></button>
 			</div>
 		</div>
 	</form>
@@ -64,7 +64,8 @@
 			<thead>
 				<tr>
 					<th>Group Name</th>
-					<th><!--Number of Players--></th>
+					<th class="text-center">See Group Members</th>
+					<th class="text-center">See Group Games</th>
 					<th>Update</th>
 					<th>Delete</th>
 				</tr>
@@ -74,19 +75,25 @@
 				<tr>
 					<td class="hidden">{{id}}</td>
 					<td>{{group_name}}</td>
-					<td><!--number of players-->
+					<td align = "center"><!--number of players-->
 						<form action="groups/seePlayers" method="get">
 							<input type="hidden" name="seePlayersID" value="{{id}}">
-							<button type="submit" class="btn btn-warning">See Players</button>
+							<button type="submit" class="btn btn-warning btn-lg"><span class="glyphicon glyphicon-user"></span></button>
+						</form>
+					</td>
+					<td align = "center"><!--number of players-->
+						<form action="groups/seeGroupGames" method="get">
+							<input type="hidden" name="seeGGID" value="{{id}}">
+							<button type="submit" class="btn btn-warning btn-lg"><span class="glyphicon glyphicon-tower"></span></button>
 						</form>
 					</td>
 					<td>
-						<button type="button" class="btn btn-warning btn-padded" data-toggle="modal" data-target="#groupUpdate{{id}}"><span class="glyphicon glyphicon-pencil"></span></button>
+						<button type="button" class="btn btn-warning btn-padded btn-lg" data-toggle="modal" data-target="#groupUpdate{{id}}"><span class="glyphicon glyphicon-pencil"></span></button>
 					</td>
 					<td>
 						<form action="groups/delete" method="post">
 							<input type="hidden" name="deleteGroupID" value="{{id}}">
-							<button type="submit" onclick="return confirmation()" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
+							<button type="submit" onclick="return confirmation()" class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-remove"></span></button>
 						</form>
 					</td>
 				</tr>

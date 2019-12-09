@@ -63,7 +63,37 @@ module.exports = function () {
 			};
 		};
 	});
+//////////
+function searchForGames(req, res, mysql, context, complete) {
+	//sanitize the input as well as include the % character
+	var query = "SELECT * FROM games JOIN player_games ON game_id = games.id JOIN player_groups ON player_groups.player_id = player_games.player_id WHERE group_id = " + req.query.seeGGID;
+	console.log(query)
+	mysql.pool.query(query, function (err, results) {
+		if (err) {
+			res.write(JSON.stringify(err));
+			res.end();
+		}
+		context.games = results;
+		complete();
+	});
+};
 
+router.get('/seeGroupGames', function (req, res) {
+	var callbackCount = 0;
+	var context = {};
+	var mysql = req.app.get('mysql');
+
+	searchForGames(req, res, mysql, context, complete);
+	function complete() {
+		callbackCount++;
+		if (callbackCount >= 1) {
+			res.render('games', context);
+		};
+	};
+});
+
+
+///////////
 	router.post('/addGroupPlayer', function (req, res) {
 		// console.log(req.body)
 		var mysql = req.app.get('mysql');

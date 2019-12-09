@@ -54,6 +54,34 @@ module.exports = function () {
 		});
 	};
 
+	function searchPlayerGames(req, res, mysql, context, complete) {
+		//sanitize the input as well as include the % character
+		var query = "SELECT * FROM games JOIN player_games ON game_id = games.id WHERE player_id = " + req.query.seePlayerGID;
+		console.log(query)
+		mysql.pool.query(query, function (err, results) {
+			if (err) {
+				res.write(JSON.stringify(err));
+				res.end();
+			}
+			context.games = results;
+			complete();
+		});
+	};
+
+	router.get('/seePlayerGames', function (req, res) {
+		var callbackCount = 0;
+		var context = {};
+		var mysql = req.app.get('mysql');
+
+		searchPlayerGames(req, res, mysql, context, complete);
+		function complete() {
+			callbackCount++;
+			if (callbackCount >= 1) {
+				res.render('games', context);
+			};
+		};
+	});
+
 	router.get('/', function (req, res) {
 		var mysql = req.app.get('mysql');
     async.parallel(

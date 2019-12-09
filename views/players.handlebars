@@ -67,8 +67,8 @@
         <tr>
           <th>First Name</th>
           <th>Last Name</th>
-          <th>Player Card</th>
-          <th>Edit</th>
+          <th class="text-center">See Player Games</th>
+          <th>Update</th>
           <th>Delete</th>
         </tr>
       </thead>
@@ -78,16 +78,21 @@
           <td class="hidden">{{id}}</td>
           <td class="td-padded">{{first_name}}</td>
           <td class="td-padded">{{last_name}}</td>
-          <td>
-            <button type="button" class="btn btn-warning btn-padded" data-toggle="modal" data-target="#playerCard{{id}}"><span class="glyphicon glyphicon-user"></span></button>
+          <td align = "center">
+						<form action="players/seePlayerGames" method="get">
+							<input type="hidden" name="seePlayerGID" value="{{id}}">
+							<button type="submit" class="btn btn-warning btn-lg"><span class="glyphicon glyphicon-tower"></button>
+						</form>
+
+            <!-- <button type="button" class="btn btn-warning btn-padded btn-lg" data-target="#playerCard{{id}}"><span class="glyphicon glyphicon-tower"></span></button> -->
           </td>
           <td>
-            <button type="button" class="btn btn-warning btn-padded" data-toggle="modal" data-target="#playerUpdate{{id}}"><span class="glyphicon glyphicon-pencil"></span></button>
+            <button type="button" class="btn btn-warning btn-padded btn-lg" data-toggle="modal" data-target="#playerUpdate{{id}}"><span class="glyphicon glyphicon-pencil"></span></button>
           </td>
           <td>
             <form action="players/delete" method="post">
               <input type="hidden" name="deleteID" value="{{id}}">
-              <button type="submit" onclick="return confirmation()" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
+              <button type="submit" onclick="return confirmation()" class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-remove"></span></button>
             </form>
           </td>
         </tr>
@@ -135,7 +140,7 @@
   </div>
 
 {{!-- PLAYER CARD --}}
- {{#each players}}
+ <!-- {{#each players}}
   <div class="row d-flex justify-content-center modalWrapper">
     <div class="modal fade modalUpdateClass" id="playerCard{{id}}" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -153,8 +158,8 @@
                   <img class="player-img" src="{{img}}">
                 </div>
                 <div class="col-md-6">
-                {{!-- <p>Favorite Game: </p> <!-- game they own --> --}}
-                {{!-- <p>Team: Team Gryffindor</p> <!-- team they are on --> --}}
+                <p>Favorite Game: </p>
+                <p>Team: </p>
                 </div>
               </div>
             </div>
@@ -163,5 +168,4 @@
       </div>
     </div>
   </div>
-  {{/each}}
-  </div>
+  {{/each}} -->

@@ -10,13 +10,12 @@
 			<div class="form-group col-md-3">
 				<select class="form-control" name="filter">
 					<option value="game_name">Game Name </option>
-					<option value="game_category">Game Category </option>
 					<option value="min_players">Minimum Players </option>
 					<option value="max_players">Maximum Players </option>
 				</select>
 			</div>
 			<div class="form-group col-md-2">
-				<button type="submit" class="ylw-btn">Search</button>
+				<button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
 			</div>
 		</div>
 	</form>
@@ -55,8 +54,10 @@
 				<tr>
 					<th>Game Name</th>
 					<!-- <th>Game Category</th> -->
-          <th>Minimum Players</th>
-			    <th>Maximum Players</th>
+          <th class="text-center">Minimum Players</th>
+			    <th class="text-center">Maximum Players</th>
+					<th>Update</th>
+					<th>Delete</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -65,15 +66,15 @@
 					<td class="hidden">{{id}}</td>
 					<td>{{game_name}}</td>
           <!-- <td>{{game_category}}</td> -->
-          <td>{{min_players}}</td>
-          <td>{{max_players}}</td>
+          <td align = "center">{{min_players}}</td>
+          <td align = "center">{{max_players}}</td>
 					<td>
-						<button type="button" class="btn btn-warning btn-padded" data-toggle="modal" data-target="#gameUpdate{{id}}"><span class="glyphicon glyphicon-pencil"></span></button>
+						<button type="button" class="btn btn-warning btn-padded btn-lg" data-toggle="modal" data-target="#gameUpdate{{id}}"><span class="glyphicon glyphicon-pencil"></span></button>
 					</td>
 					<td>
 						<form action="games/delete" method="post">
 							<input type="hidden" name="deleteGID" value="{{id}}">
-							<button type="submit" onclick="return confirmation()" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
+							<button type="submit" onclick="return confirmation()" class="btn btn-danger btn-lg"><span class="glyphicon glyphicon-remove"></span></button>
 						</form>
 					</td>
 				</tr>
