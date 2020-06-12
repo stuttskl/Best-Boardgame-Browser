@@ -1,6 +1,11 @@
 # Best Boardgame Browser
 ## Created and Developed by Zack Jaffe-Notier and Katie Stutts
 
+Full stack website that allows users to fully manage games from their library.
+Uses Node.js and Express for server-side logic, following RESTful routing protocols.
+Pages generated with complex SQL join queries and dynamically rendered data via 
+Handlebars.js templating and client-side JavaScript.
+
 <a href="https://ibb.co/8DZqkhW"><img src="https://i.ibb.co/1fW1cSD/Screen-Shot-2019-12-05-at-4-44-52-PM.png" alt="Screen-Shot-2019-12-05-at-4-44-52-PM" border="0"></a>
 
 
