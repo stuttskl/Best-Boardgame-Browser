@@ -39,7 +39,7 @@ module.exports = function () {
 						res.redirect('/players');
 				}
 		});
-});
+  });
 
 	function searchFunction(req, res, mysql, context, complete) {
 		//sanitize the input as well as include the % character

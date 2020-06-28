@@ -14,7 +14,7 @@ module.exports = function () {
 //     });
 //   };
   
-    function getAllCats(mysql) {
+  function getAllCats(mysql) {
     return function(callback) {
       mysql.pool.query('SELECT id, category FROM category;', function(err, data1) {
         if (err) {
@@ -65,7 +65,7 @@ module.exports = function () {
     });
   });
 
-router.post('/delete', function (req, res) {
+  router.post('/delete', function (req, res) {
    var mysql = req.app.get('mysql');
    var sql = "DELETE FROM category WHERE id = ?";
    var inserts = [req.body.deleteCategoryID];
@@ -113,13 +113,13 @@ router.post('/delete', function (req, res) {
   });
 
   router.post('/add', function (req, res) {
-    console.log(req.body)
+    // console.log(req.body)
     var mysql = req.app.get('mysql');
     var sql = "INSERT INTO category (`category`) VALUES (?)";
     var inserts = [req.body.new_category_name];
     sql = mysql.pool.query(sql, inserts, function (err, results) {
       if (err) {
-        console.log(JSON.stringify(error))
+        // console.log(JSON.stringify(error))
         res.write(JSON.stringify(error));
         res.end();
       } else {

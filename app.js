@@ -38,5 +38,5 @@ app.use(function (err, req, res, next) {
 });
 
 app.listen(app.get('port'), function() {
-  console.log('server listening on: flip2.engr.oregonstate.edu:' + app.get('port') + '; press Ctrl-C to terminate.');
+  console.log('server listening on: localhost:' + app.get('port') + '; press Ctrl-C to terminate.');
 });

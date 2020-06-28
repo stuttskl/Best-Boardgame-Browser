@@ -1,65 +1,65 @@
 
 <div class="container" id='categoriesContainer'>
-    <h1>Game Categories</h1>
-    <!--ADD Game-Category-->
-    <h3>Add A Game to A Category</h3>
-	<form action="/category/addGameCat" method="post">
-	    <div class="form-group">
-	        <div class="form-group col-md-3">
-	            <select class="form-control" name="category_selection">
-	                <option value="select-category">Select Category</option>
-	                {{#each category}}<option value="{{id}}">{{category}}</option>{{/each}}
-	             </select>
-	          </div>
-	       <div class="form-group col-md-3">
-                   <select class="form-control" name="game2_selection">
-	               <option value="select-game">Select Game</option>
-	                   {{#each games}}<option value="{{id}}">{{game_name}}</option>{{/each}}
-	            </select>
-	       </div>
-	       <button type="submit" class="btn btn-primary">Submit</button>
-	    </div>
-	</form>
+  <h1>Game Categories</h1>
+  <!--ADD Game-Category-->
+  <h3>Add A Game to A Category</h3>
+  <form action="/category/addGameCat" method="post">
+    <div class="form-group">
+      <div class="form-group col-md-3">
+        <select class="form-control" name="category_selection">
+          <option value="select-category">Select Category</option>
+          {{#each category}}<option value="{{id}}">{{category}}</option>{{/each}}
+        </select>
+      </div>
+      <div class="form-group col-md-3">
+        <select class="form-control" name="game2_selection">
+          <option value="select-game">Select Game</option>
+            {{#each games}}<option value="{{id}}">{{game_name}}</option>{{/each}}
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </form>
 
 	<!--ADD Category-->
 	<button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#addcategory" aria-expanded="false" aria-controls="addaccount">Add a new Category</button><br />
 	<div class="collapse" id="addcategory">
-	    <form action="/category/add" method="post">
-	        <div class="form-row">
-		    <div class="form-group col-md-6">
-		        <input type="text" class="form-control" name="new_category_name" placeholder="Category Name">
-		    </div>
-		 </div>
-		 <button type="submit" class="btn btn-primary">Submit</button>
-	    </form>
+    <form action="/category/add" method="post">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <input type="text" class="form-control" name="new_category_name" placeholder="Category Name">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 	</div>
 	<span> &nbsp </span><br></br>
 
-        <!--Category TABLE-->
+  <!--Category TABLE-->
 	<div class="table-responsive">
-	    <table class='table'>
+    <table class='table'>
 		<thead>
-		    <tr>
-			<th>Category</th>
-                        <th></th>
-			<th>See Games</th>
-	             </tr>
+      <tr>
+			  <th>Category</th>
+        <th></th>
+			  <th>See Games</th>
+      </tr>
 		</thead>
-		<tbody>
-		    {{#each category}}
-	            <tr>
-			<td class="hidden">{{id}}</td>
-			<td>{{category}}</td>
-                        <td> <!--num games--> </td>
-			<td>
-		            <form action="category/search" method="get">
-				<input type="hidden" name="seeGamesID" value="{{id}}">
-				<button type="submit" class="btn btn-warning btn-lg"><span class="glyphicon glyphicon-tower"></span></button>
-			    </form>
-			</td>
-		     </tr>
-		     {{/each}}
-		</tbody>
-	   </table>
+      <tbody>
+          {{#each category}}
+        <tr>
+          <td class="hidden">{{id}}</td>
+          <td>{{category}}</td>
+          <td> <!--num games--> </td>
+          <td>
+            <form action="category/search" method="get">
+              <input type="hidden" name="seeGamesID" value="{{id}}">
+              <button type="submit" class="btn btn-warning btn-lg"><span class="glyphicon glyphicon-tower"></span></button>
+            </form>
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
 	</div>
-    </div>
+</div>

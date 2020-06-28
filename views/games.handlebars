@@ -83,48 +83,48 @@
 		</table>
 	</div>
 
-<!--GAME UPDATE-->
-{{#each games}}
-	<div class="row d-flex justify-content-center modalWrapper">
-		<div class="modal fade modalUpdateClass" id="gameUpdate{{id}}" tabindex="-1" role="dialog" aria-hidden="true">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<form action="/games/update" method="post">
-						<input type="hidden" name="updateID" value="{{id}}">
-						<div class="modal-header text-center">
-							<h4 class="modal-title w-100 font-weight-bold ml-5"> Update Entry</h4>
-							<button type="button" class="close text-secondary" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body mx-3">
-							<div class="md-form mb-1">
-								<label data-error="wrong" data-success="right" for="editGameName">Game Name</label>
-								<input type="text" name="editGameName" class="form-control validate" value="{{game_name}}" required>
-							</div>
-							<!-- <div class="md-form mb-1">
-								<label data-error="wrong" data-success="right" for="editGameCategory">Last Name</label>
-								<input type="text" name="editGameCategory" class="form-control validate" value="{{game_category}}" required>
-							</div> -->
-              <div class="md-form mb-1">
-								<label data-error="wrong" data-success="right" for="editMinPlayers">Minumum Number of Players</label>
-								<input type="text" name="editMinPlayers" class="form-control validate" min="0" value="{{min_players}}" required>
-							</div>
-              <div class="md-form mb-1">
-								<label data-error="wrong" data-success="right" for="editMaxPlayers">Maximum Number of Players</label>
-								<input type="text" name="editMaxPlayers" class="form-control validate" min="1" value="{{max_players}}" required>
-							</div>
-						</div>
-						<div class="modal-footer d-flex justify-content-center updateInsideWrapper">
-							<button type="submit" class="btn btn-secondary btn-block updateInside">
-								Confirm Changes
-								<i class="fas fa-paper-plane-o ml-1"></i>
-							</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	{{/each}}
+  <!--GAME UPDATE-->
+  {{#each games}}
+    <div class="row d-flex justify-content-center modalWrapper">
+      <div class="modal fade modalUpdateClass" id="gameUpdate{{id}}" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <form action="/games/update" method="post">
+              <input type="hidden" name="updateID" value="{{id}}">
+              <div class="modal-header text-center">
+                <h4 class="modal-title w-100 font-weight-bold ml-5"> Update Entry</h4>
+                <button type="button" class="close text-secondary" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body mx-3">
+                <div class="md-form mb-1">
+                  <label data-error="wrong" data-success="right" for="editGameName">Game Name</label>
+                  <input type="text" name="editGameName" class="form-control validate" value="{{game_name}}" required>
+                </div>
+                <!-- <div class="md-form mb-1">
+                  <label data-error="wrong" data-success="right" for="editGameCategory">Last Name</label>
+                  <input type="text" name="editGameCategory" class="form-control validate" value="{{game_category}}" required>
+                </div> -->
+                <div class="md-form mb-1">
+                  <label data-error="wrong" data-success="right" for="editMinPlayers">Minumum Number of Players</label>
+                  <input type="text" name="editMinPlayers" class="form-control validate" min="0" value="{{min_players}}" required>
+                </div>
+                <div class="md-form mb-1">
+                  <label data-error="wrong" data-success="right" for="editMaxPlayers">Maximum Number of Players</label>
+                  <input type="text" name="editMaxPlayers" class="form-control validate" min="1" value="{{max_players}}" required>
+                </div>
+              </div>
+              <div class="modal-footer d-flex justify-content-center updateInsideWrapper">
+                <button type="submit" class="btn btn-secondary btn-block updateInside">
+                  Confirm Changes
+                  <i class="fas fa-paper-plane-o ml-1"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/each}}
 </div>
