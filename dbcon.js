@@ -2,7 +2,7 @@ let mysql = require('mysql');
 let pool = mysql.createConnection({
   host: 'oniddb.cws.oregonstate.edu',
   user: 'stuttsk-db',
-  password: 'Hbxn7wUp9KlonQpU',
+  password: 'xxxxxxx',
   database: 'stuttsk-db'
 });
 
