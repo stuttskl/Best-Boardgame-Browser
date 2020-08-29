@@ -27,7 +27,7 @@ module.exports = function () {
 
 	function getAllPlayers(mysql) {
 		return function(callback) {
-			mysql.pool.query('SELECT id, first_name, last_name, img FROM players;', function(err, data1) {
+			mysql.pool.query('SELECT id, first_name, last_name FROM players;', function(err, data1) {
 				if (err) {
 					return callback(err, []);
 				}
